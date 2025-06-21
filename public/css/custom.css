@@ -1,0 +1,50 @@
+
+.navbar-contact {
+	background: #fff;
+	-moz-box-shadow: rgba(0, 0, 0, 0.09) 0 2px 0;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.09) 0 2px 0;
+	box-shadow: rgba(0, 0, 0, 0.09) 0 2px 0;
+	padding: 10px 16px;
+}
+
+.navbar-contact .navbar-brand-contact {
+	font-weight: bold;
+	letter-spacing: -1px;
+	font-size: 20px;
+	color: #dd5638;
+}
+
+.navbar-light-contact .navbar-nav-contact .active>.nav-link-contact {
+    color: #435d7d;
+}
+
+.fileinput-contact {
+	text-align: center;
+}
+
+.btn-circle-contact {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+
+ul.pagination-contact {
+	margin-bottom: 0;
+}
+
+.card-title-contact {
+    color: #fff;
+    background: #435d7d;
+    padding: 16px 20px;
+}
+
+.toggle-group {
+    z-index: 999;
+}
+.custom-control-input {
+    float: left;
+}
