@@ -1,0 +1,89 @@
+<?php
+
+namespace App\Http\Controllers\User;
+
+use App\Http\Controllers\Controller;
+use App\Models\MasterUserModel;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+
+class MasterUserController extends Controller
+{
+    // Index ini berguna untuk menampilkan semua data user di table
+    public function index()
+    {
+        // Melakukan query
+        $query = MasterUserModel::select('*')->get();
+        // -> digunakan untuk debugging sebelum menampilkan datanya pada table,
+        // dd($query); 
+        return view('master_user.index', compact('query'));
+        //view disini mengarah ke file (.) titik menandakan folder jadi dibaca folder master_user, file nya index
+    }
+
+    public function createUser()
+    {
+
+        $data = new MasterUserModel;
+        return view('master_user.add_user', compact('data'));
+    }
+
+    // menyimpan user yang di daftarkan
+    public function saveUser(Request $request)
+    {
+        // mandatori berarti harus diisi jika tidak mandatori atau nullable, tidak perlu declare disini
+        $mandatory = [
+            'name'       => 'required',
+            'username'   => 'required',
+            'status'     => 'required',
+            'role'       => 'required',
+            'email'      => 'required',
+            'telepon'    => 'required'
+        ];
+
+        // dilakukan pengecekan daripada input di mandatory apakah sudah diisi atau belum oleh user
+        $validator = Validator::make($request->all(), $mandatory, [
+            'name.required'     => 'Nama wajib diisi',
+            'username.required' => 'Username wajib diisi',
+            'status.required'   => 'Status user wajib diisi',
+            'email.required'    => 'Email wajib diisi',
+            'telepon.required'  => 'Nomor telpon wajib diisi'
+        ]);
+
+        if ($validator->fails()) {
+            Session::flash('errors', $validator->errors());
+            return redirect()->back(); //jika gagal akan kembali lagi ke halaman pengisian user
+        }
+
+        $id = $request->input('id'); // digunakan untuk mengisikan Id yang ada di table database, secara otomatis
+
+        // digunakan untuk melakukan pengecekan id nya apakah sudah ada di database, jika ada maka akan dilakukan edit, jika tidak ada berati ini adalah user baru
+        if (!empty($id)) {
+            $data = MasterUserModel::find($id);
+        } else {
+            $data = new MasterUserModel;
+            // $data->created_by = auth()->user()->id;
+        }
+
+
+        // ini adalah inputan user, berkaitan dengan form di tampilan
+        $data->name = $request->input('name');
+        $data->username = $request->input('username');
+        $data->telepon = $request->input('telepon');
+        $data->email = $request->input('email');
+        $data->role = $request->input('role');
+        $data->status = $request->input('status');
+        $data->password = '$2y$10$9RXeWXWAt1uZ7zO8DGn1d.MBuWB0iNkRDYXjmmv1qwTMvQPZ8gJFi';
+        $data->save(); //disimpan ke database dengan nama table users yang ada di MasterUserModel --> models nya
+
+        return redirect()->route('master_user.index')->with('toast_success', 'Data user berhasil disimpan');
+    }
+
+    // function mengubah user
+    public function editUser($id) //passing ke routes parameter id nya
+    {
+        //dilakukan pencarian dulu by id
+        $data = MasterUserModel::find($id);
+        return view('master_user.add_user', compact('data'));
+    }
+}

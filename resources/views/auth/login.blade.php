@@ -15,7 +15,7 @@ data-bs-theme="light">
     name="viewport"
     content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
     
-    <title>Portos</title>
+    <title>WARKOPOS</title>
     
     <meta name="description" content="" />
     
@@ -115,7 +115,7 @@ data-bs-theme="light">
                 <div class="d-flex col-12 col-xl-4 align-items-center authentication-bg p-sm-12 p-6">
                     <div class="w-px-400 mx-auto mt-12 pt-5">
                         <h4 class="mb-1">Selamat Datang</h4>
-                        <p class="mb-6">Sinkro MSK</p>
+                        <p class="mb-6">WARKOPOS</p>
                         
                         <form method="POST" action="{{ route('login') }}" class="mb-6">
                             @csrf
@@ -146,7 +146,7 @@ data-bs-theme="light">
                         
                         <p class="text-center">
                             <span>New on our platform?</span>
-                            <a href="auth-register-cover.html">
+                            <a href="{{ route('register') }}">
                                 <span>Create an account</span>
                             </a>
                         </p>
