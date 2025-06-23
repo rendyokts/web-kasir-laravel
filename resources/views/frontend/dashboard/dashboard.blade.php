@@ -1,639 +1,212 @@
  <div class="container-xxl flex-grow-1 container-p-y">
      <div class="row g-6 mb-4">
-         <div class="col-xl-4 col-sm-6">
-             <div class="card h-100">
-                 <div class="card-header pb-0 d-flex justify-content-between align-items-start">
-                     <div class="card-title mb-0">
-                         <h4 class="mb-0">471</h4>
-                         <small class="text-body">Call</small>
-                     </div>
-                     <div class="badge bg-label-success"><a href="#">Detail</a></div>
-                 </div>
+         <!-- Card Border Shadow -->
+         <div class="col-lg-3 col-sm-6">
+             <div class="card card-border-shadow-primary h-100">
                  <div class="card-body">
-                     <div id="averageDailyTraffic"></div>
-                 </div>
-             </div>
-         </div>
-         <div class="col-xl-4 col-sm-6">
-             <div class="card h-100">
-                 <div class="card-header pb-0 d-flex justify-content-between align-items-start">
-                     <div class="card-title mb-0">
-                         <h4 class="mb-0">1044</h4>
-                         <small class="text-body">Total SPK Bulan
-                             123</small>
-                     </div>
-                     <div class="badge bg-label-success"><a href="#">Detail</a></div>
-                 </div>
-                 <div class="card-body">
-                     <div id="averageDailyTraffic"></div>
-                 </div>
-             </div>
-         </div>
-         <div class="col-xl-4 col-sm-6">
-             <div class="card h-100">
-                 <div class="card-header pb-0 d-flex justify-content-between align-items-start">
-                     <div class="card-title mb-0">
-                         <h4 class="mb-0">123</h4>
-                         <small class="text-body">Nota Terbit Bulan
-                             123</small>
-                     </div>
-                     <div class="badge bg-label-success"><a href="#">Detail</a></div>
-                 </div>
-                 <div class="card-body">
-                     <div id="averageDailyTraffic"></div>
-                 </div>
-             </div>
-         </div>
-         <div class="col-xl-4 col-sm-6">
-             <div class="card h-100">
-                 <div class="card-header pb-0 d-flex justify-content-between align-items-start">
-                     <div class="card-title mb-0">
-                         <h4 class="mb-0">123</h4>
-                         <small class="text-body">Nota Billed Bulan
-                             123</small>
-                     </div>
-                     <div class="badge bg-label-success"><a href="#">Detail</a></div>
-                 </div>
-                 <div class="card-body">
-                     <div id="averageDailyTraffic"></div>
-                 </div>
-             </div>
-         </div>
-         <div class="col-xl-4 col-sm-6">
-             <div class="card h-100">
-                 <div class="card-header pb-0 d-flex justify-content-between align-items-start">
-                     <div class="card-title mb-0">
-                         <h4 class="mb-0">35.000.000</h4>
-                         <small class="text-body">Total Jasa Bulan
-                             123</small>
-                     </div>
-                     <div class="badge bg-label-success"><a href="#">Detail</a></div>
-                 </div>
-                 <div class="card-body">
-                     <div id="averageDailyTraffic"></div>
-                 </div>
-             </div>
-         </div>
-         <div class="col-xl-4 col-sm-6">
-             <div class="card h-100">
-                 <div class="card-header pb-0 d-flex justify-content-between align-items-start">
-                     <div class="card-title mb-0">
-                         <h4 class="mb-0">15.000.000</h4>
-                         <small class="text-body">Tunda Sharing Bulan
-                             123</small>
-                     </div>
-                     <div class="badge bg-label-success"><a href="#">Detail</a></div>
-                 </div>
-                 <div class="card-body">
-                     <div id="averageDailyTraffic"></div>
-                 </div>
-             </div>
-         </div>
-     </div>
-     <div class="row g-6 mb-4">
-         <div class="col-xl-12 col-sm-6">
-             <div class="card">
-                 <div class="card-header header-elements">
-                     <h5 class="card-title mb-0">Data Call Kapal</h5>
-                     <div class="card-action-element ms-auto py-0">
-                         <div class="dropdown">
-                             <button type="button" class="btn dropdown-toggle px-0" data-bs-toggle="dropdown"
-                                 aria-expanded="false">
-                                 <i class="icon-base ti tabler-calendar"></i>
-                             </button>
-                             <ul class="dropdown-menu dropdown-menu-end">
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Today</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Yesterday</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Last
-                                         7 Days</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Last
-                                         30 Days</a>
-                                 </li>
-                                 <li>
-                                     <hr class="dropdown-divider" />
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Current Month</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);" class="dropdown-item d-flex align-items-center">Last
-                                         Month</a>
-                                 </li>
-                             </ul>
+                     <div class="d-flex align-items-center mb-2">
+                         <div class="avatar me-4">
+                             <span class="avatar-initial rounded bg-label-primary"><i
+                                     class="icon-base ti tabler-truck icon-28px"></i></span>
                          </div>
+                         <h4 class="mb-0">42 <small>item</small></h4>
                      </div>
-                 </div>
-                 <div class="card-body">
-                     <canvas id="barChart" class="chartjs" data-height="400"></canvas>
+                     <p class="mb-1">Barang Terjual Harian</p>
+                     {{-- <p class="mb-0">
+                         <span class="text-heading fw-medium me-2">+18.2%</span>
+                         <small class="text-body-secondary">than last week</small>
+                     </p> --}}
                  </div>
              </div>
          </div>
-         <div class="col-xl-12 col-sm-6">
-             <div class="card">
-                 <div class="card-header header-elements">
-                     <h5 class="card-title mb-0">Data Nota Kapal</h5>
-                     <div class="card-action-element ms-auto py-0">
-                         <div class="dropdown">
-                             <button type="button" class="btn dropdown-toggle px-0" data-bs-toggle="dropdown"
-                                 aria-expanded="false">
-                                 <i class="icon-base ti tabler-calendar"></i>
-                             </button>
-                             <ul class="dropdown-menu dropdown-menu-end">
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Today</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Yesterday</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Last
-                                         7 Days</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Last
-                                         30 Days</a>
-                                 </li>
-                                 <li>
-                                     <hr class="dropdown-divider" />
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Current Month</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Last
-                                         Month</a>
-                                 </li>
-                             </ul>
+         <div class="col-lg-3 col-sm-6">
+             <div class="card card-border-shadow-warning h-100">
+                 <div class="card-body">
+                     <div class="d-flex align-items-center mb-2">
+                         <div class="avatar me-4">
+                             <span class="avatar-initial rounded bg-label-warning"><i
+                                     class="icon-base ti tabler-alert-triangle icon-28px"></i></span>
                          </div>
+                         <h4 class="mb-0">8</h4>
                      </div>
-                 </div>
-                 <div class="card-body">
-                     <canvas id="barChart" class="chartjs" data-height="400"></canvas>
+                     <p class="mb-1">Penjualan Harian</p>
+                     {{-- <p class="mb-0">
+                         <span class="text-heading fw-medium me-2">-8.7%</span>
+                         <small class="text-body-secondary">than last week</small>
+                     </p> --}}
                  </div>
              </div>
          </div>
-     </div>
-     <div class="row g-6 mb-4">
-         <div class="col-xl-6 col-sm-6">
-             <div class="card">
-                 <div class="card-header header-elements">
-                     <h5 class="card-title mb-0">Data SPK</h5>
-                     <div class="card-action-element ms-auto py-0">
-                         <div class="dropdown">
-                             <button type="button" class="btn dropdown-toggle px-0" data-bs-toggle="dropdown"
-                                 aria-expanded="false">
-                                 <i class="icon-base ti tabler-calendar"></i>
-                             </button>
-                             <ul class="dropdown-menu dropdown-menu-end">
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Today</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Yesterday</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Last
-                                         7 Days</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Last
-                                         30 Days</a>
-                                 </li>
-                                 <li>
-                                     <hr class="dropdown-divider" />
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Current Month</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Last
-                                         Month</a>
-                                 </li>
-                             </ul>
+         <div class="col-lg-3 col-sm-6">
+             <div class="card card-border-shadow-danger h-100">
+                 <div class="card-body">
+                     <div class="d-flex align-items-center mb-2">
+                         <div class="avatar me-4">
+                             <span class="avatar-initial rounded bg-label-danger"><i
+                                     class="icon-base ti tabler-git-fork icon-28px"></i></span>
                          </div>
+                         <h4 class="mb-0"><small>Rp</small> 270.000</h4>
                      </div>
-                 </div>
-                 <div class="card-body">
-                     <canvas id="barChart" class="chartjs" data-height="400"></canvas>
+                     <p class="mb-1">Pendapatan Hari Ini</p>
+                     {{-- <p class="mb-0">
+                         <span class="text-heading fw-medium me-2">+4.3%</span>
+                         <small class="text-body-secondary">than last week</small>
+                     </p> --}}
                  </div>
              </div>
          </div>
-         <div class="col-xl-6 col-sm-6">
-             <div class="card">
-                 <div class="card-header header-elements">
-                     <h5 class="card-title mb-0">Data Nota</h5>
-                     <div class="card-action-element ms-auto py-0">
-                         <div class="dropdown">
-                             <button type="button" class="btn dropdown-toggle px-0" data-bs-toggle="dropdown"
-                                 aria-expanded="false">
-                                 <i class="icon-base ti tabler-calendar"></i>
-                             </button>
-                             <ul class="dropdown-menu dropdown-menu-end">
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Today</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Yesterday</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Last
-                                         7 Days</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Last
-                                         30 Days</a>
-                                 </li>
-                                 <li>
-                                     <hr class="dropdown-divider" />
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Current Month</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Last
-                                         Month</a>
-                                 </li>
-                             </ul>
+         <div class="col-lg-3 col-sm-6">
+             <div class="card card-border-shadow-info h-100">
+                 <div class="card-body">
+                     <div class="d-flex align-items-center mb-2">
+                         <div class="avatar me-4">
+                             <span class="avatar-initial rounded bg-label-info"><i
+                                     class="icon-base ti tabler-clock icon-28px"></i></span>
                          </div>
+                         <h4 class="mb-0"><small>Rp</small> 130.000</h4>
                      </div>
-                 </div>
-                 <div class="card-body">
-                     <canvas id="barChart" class="chartjs" data-height="400"></canvas>
+                     <p class="mb-1">Pengeluaran Hari Ini</p>
+                     {{-- <p class="mb-0">
+                         <span class="text-heading fw-medium me-2">-2.5%</span>
+                         <small class="text-body-secondary">than last week</small>
+                     </p> --}}
                  </div>
              </div>
          </div>
-     </div>
-     <div class="row g-6 mb-4">
-         <div class="col-xl-6 col-sm-6">
-             <div class="card">
-                 <div class="card-header header-elements">
-                     <h5 class="card-title mb-0">Total Jasa</h5>
-                     <div class="card-action-element ms-auto py-0">
-                         <div class="dropdown">
-                             <button type="button" class="btn dropdown-toggle px-0" data-bs-toggle="dropdown"
-                                 aria-expanded="false">
-                                 <i class="icon-base ti tabler-calendar"></i>
-                             </button>
-                             <ul class="dropdown-menu dropdown-menu-end">
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Today</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Yesterday</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Last
-                                         7 Days</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Last
-                                         30 Days</a>
-                                 </li>
-                                 <li>
-                                     <hr class="dropdown-divider" />
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Current Month</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Last
-                                         Month</a>
-                                 </li>
-                             </ul>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="card-body">
-                     <canvas id="barChart" class="chartjs" data-height="400"></canvas>
-                 </div>
-             </div>
-         </div>
-         <div class="col-xl-6 col-sm-6">
-             <div class="card">
-                 <div class="card-header header-elements">
-                     <h5 class="card-title mb-0">Total Tunda Sharing</h5>
-                     <div class="card-action-element ms-auto py-0">
-                         <div class="dropdown">
-                             <button type="button" class="btn dropdown-toggle px-0" data-bs-toggle="dropdown"
-                                 aria-expanded="false">
-                                 <i class="icon-base ti tabler-calendar"></i>
-                             </button>
-                             <ul class="dropdown-menu dropdown-menu-end">
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Today</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Yesterday</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Last
-                                         7 Days</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Last
-                                         30 Days</a>
-                                 </li>
-                                 <li>
-                                     <hr class="dropdown-divider" />
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Current Month</a>
-                                 </li>
-                                 <li>
-                                     <a href="javascript:void(0);"
-                                         class="dropdown-item d-flex align-items-center">Last
-                                         Month</a>
-                                 </li>
-                             </ul>
-                         </div>
-                     </div>
-                 </div>
-                 <div class="card-body">
-                     <canvas id="barChart" class="chartjs" data-height="400"></canvas>
-                 </div>
-             </div>
-         </div>
-     </div>
- </div>
+         <!--/ Card Border Shadow -->
 
+         <div class="col-xxl-9 col-lg-12 col-md-12 col-sm-12">
+             <div class="card h-100">
+                 <div class="card-header d-flex align-items-center justify-content-between">
+                     <div class="card-title mb-0">
+                         <h5 class="m-0 me-2">Pendapatan & Pengeluaran (7 Hari Terakhir)</h5>
+                     </div>
+                 </div>
+                 <div class="card-body">
+                     <div class="table-responsive">
+                         <canvas id="pendapatanPengeluaranChart" height="150"></canvas>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <div class="col-xxl-3 col-md-6">
+             <div class="card h-100">
+                 <div class="card-header d-flex justify-content-between">
+                     <div class="card-title m-0 me-2">
+                         <h5 class="mb-1">Paling Laris</h5>
+                         <p class="card-subtitle">Total 10 Pembeli</p>
+                     </div>
+                 </div>
+                 <div class="card-body">
+                     <ul class="p-0 m-0">
+                         <li class="d-flex mb-6">
+                             <div class="me-4">
+                                 <img src="../../assets/img/products/iphone.png" alt="User" class="rounded"
+                                     width="46" />
+                             </div>
+                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                 <div class="me-2">
+                                     <h6 class="mb-0">Indomie Goreng</h6>
+                                     <small class="text-body d-block">Kode Barang</small>
+                                 </div>
+                                 <div class="user-progress d-flex align-items-center gap-1">
+                                     <p class="mb-0">Rp 120.000</p>
+                                 </div>
+                             </div>
+                         </li>
+                         
+                         <li class="d-flex mb-6">
+                             <div class="me-4">
+                                 <img src="../../assets/img/products/iphone.png" alt="User" class="rounded"
+                                     width="46" />
+                             </div>
+                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                 <div class="me-2">
+                                     <h6 class="mb-0">Kopi Liong</h6>
+                                     <small class="text-body d-block">Kode Barang</small>
+                                 </div>
+                                 <div class="user-progress d-flex align-items-center gap-1">
+                                     <p class="mb-0">Rp 40.000</p>
+                                 </div>
+                             </div>
+                         </li>
+                         
+                         <li class="d-flex mb-6">
+                             <div class="me-4">
+                                 <img src="../../assets/img/products/iphone.png" alt="User" class="rounded"
+                                     width="46" />
+                             </div>
+                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                 <div class="me-2">
+                                     <h6 class="mb-0">Nutrisari Sirsak</h6>
+                                     <small class="text-body d-block">Kode Barang</small>
+                                 </div>
+                                 <div class="user-progress d-flex align-items-center gap-1">
+                                     <p class="mb-0">Rp 30.000</p>
+                                 </div>
+                             </div>
+                         </li>
+                         
+                     </ul>
+                 </div>
+             </div>
+            </div>
+            @include('layouts.footer')
 
- @section('page-js')
-     <script src="{{ asset('portos/assets/js/cards-statistics.js') }}"></script>
+         @section('page-js')
+             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+             <script src="{{ asset('portos/assets/js/cards-statistics.js') }}"></script>
+             <script>
+                 const labels = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
+                 const pendapatanData = [270000, 180000, 250000, 220000, 300000, 270000, 290000]; // contoh
+                 const pengeluaranData = [130000, 150000, 120000, 100000, 110000, 90000, 95000]; // contoh
 
-     <script>
-         const averageDailyTrafficEl = document.querySelector('#averageDailyTraffic'),
-             averageDailyTrafficConfig = {
-                 chart: {
-                     height: 145,
-                     parentHeightOffset: 0,
-                     type: 'bar',
-                     toolbar: {
-                         show: false
-                     }
-                 },
-                 plotOptions: {
-                     bar: {
-                         barHeight: '100%',
-                         columnWidth: '11px',
-                         startingShape: 'rounded',
-                         endingShape: 'rounded',
-                         borderRadius: 5
-                     }
-                 },
-                 colors: [config.colors.warning],
-                 grid: {
-                     show: false,
-                     padding: {
-                         top: -30,
-                         left: -18,
-                         bottom: -13,
-                         right: -18
-                     }
-                 },
-                 dataLabels: {
-                     enabled: false
-                 },
-                 tooltip: {
-                     enabled: false
-                 },
-                 series: [{
-                     data: [30, 40, 50, 60, 70, 80, 90]
-                 }],
-                 legend: {
-                     show: false
-                 },
-                 xaxis: {
-                     categories: ['01', '02', '03', '04', '05', '06', '07'],
-                     axisBorder: {
-                         show: false
-                     },
-                     axisTicks: {
-                         show: false
-                     },
-                     labels: {
-                         style: {
-                             colors: labelColor,
-                             fontSize: '13px',
-                             fontFamily: fontFamily
-                         },
-                         show: true
-                     }
-                 },
-                 yaxis: {
-                     labels: {
-                         show: false
-                     }
-                 },
-                 responsive: [{
-                         breakpoint: 1441,
-                         options: {
-                             plotOptions: {
-                                 bar: {
-                                     borderRadius: 5
-                                 }
-                             }
-                         }
-                     },
-                     {
-                         breakpoint: 1200,
-                         options: {
-                             plotOptions: {
-                                 bar: {
-                                     columnWidth: '25%',
-                                     borderRadius: 9
-                                 }
-                             }
-                         }
-                     },
-                     {
-                         breakpoint: 992,
-                         options: {
-                             plotOptions: {
-                                 bar: {
-                                     borderRadius: 8,
-                                     columnWidth: '25%'
-                                 }
-                             }
-                         }
-                     },
-                     {
-                         breakpoint: 836,
-                         options: {
-                             plotOptions: {
-                                 bar: {
-                                     columnWidth: '30%'
-                                 }
-                             }
-                         }
-                     },
-                     {
-                         breakpoint: 738,
-                         options: {
-                             plotOptions: {
-                                 bar: {
-                                     columnWidth: '35%',
-                                     borderRadius: 6
-                                 }
-                             }
-                         }
-                     },
-                     {
-                         breakpoint: 576,
-                         options: {
-                             plotOptions: {
-                                 bar: {
-                                     columnWidth: '25%',
-                                     borderRadius: 10
-                                 }
-                             }
-                         }
-                     },
-                     {
-                         breakpoint: 500,
-                         options: {
-                             plotOptions: {
-                                 bar: {
-                                     columnWidth: '24%',
-                                     borderRadius: 8
-                                 }
-                             }
-                         }
-                     },
-                     {
-                         breakpoint: 450,
-                         options: {
-                             plotOptions: {
-                                 bar: {
-                                     borderRadius: 6
-                                 }
-                             }
-                         }
-                     }
-                 ]
-             };
-         if (typeof averageDailyTrafficEl !== undefined && averageDailyTrafficEl !== null) {
-             const averageDailyTraffic = new ApexCharts(averageDailyTrafficEl, averageDailyTrafficConfig);
-             averageDailyTraffic.render();
-         }
-     </script>
-
-     <script>
-         const barChart = document.getElementById('barChart');
-         if (barChart) {
-             const barChartVar = new Chart(barChart, {
-                 type: 'bar',
-                 data: {
-                     labels: [
-                         '7/12',
-                         '8/12',
-                         '9/12',
-                         '10/12',
-                         '11/12',
-                         '12/12',
-                         '13/12',
-                         '14/12',
-                         '15/12',
-                         '16/12',
-                         '17/12',
-                         '18/12',
-                         '19/12'
-                     ],
-                     datasets: [{
-                         data: [275, 90, 190, 205, 125, 85, 55, 87, 127, 150, 230, 280, 190],
-                         backgroundColor: cyanColor,
-                         borderColor: 'transparent',
-                         maxBarThickness: 15,
-                         borderRadius: {
-                             topRight: 15,
-                             topLeft: 15
-                         }
-                     }]
-                 },
-                 options: {
-                     responsive: true,
-                     maintainAspectRatio: false,
-                     animation: {
-                         duration: 500
-                     },
-                     plugins: {
-                         tooltip: {
-                             rtl: isRtl,
-                             backgroundColor: cardColor,
-                             titleColor: headingColor,
-                             bodyColor: legendColor,
-                             borderWidth: 1,
-                             borderColor: borderColor
-                         },
-                         legend: {
-                             display: false
-                         }
-                     },
-                     scales: {
-                         x: {
-                             grid: {
-                                 color: borderColor,
-                                 drawBorder: false,
-                                 borderColor: borderColor
+                 new Chart(document.getElementById('pendapatanPengeluaranChart'), {
+                     type: 'line',
+                     data: {
+                         labels: labels,
+                         datasets: [{
+                                 label: 'Pendapatan',
+                                 data: pendapatanData,
+                                 borderColor: '#28a745',
+                                 backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                                 fill: true,
+                                 tension: 0.4
                              },
-                             ticks: {
-                                 color: labelColor
+                             {
+                                 label: 'Pengeluaran',
+                                 data: pengeluaranData,
+                                 borderColor: '#dc3545',
+                                 backgroundColor: 'rgba(220, 53, 69, 0.1)',
+                                 fill: true,
+                                 tension: 0.4
+                             }
+                         ]
+                     },
+                     options: {
+                         responsive: true,
+                         plugins: {
+                             tooltip: {
+                                 callbacks: {
+                                     label: function(context) {
+                                         let label = context.dataset.label || '';
+                                         let value = context.parsed.y;
+                                         return `${label}: Rp ${value.toLocaleString('id-ID')}`;
+                                     }
+                                 }
                              }
                          },
-                         y: {
-                             min: 0,
-                             max: 400,
-                             grid: {
-                                 color: borderColor,
-                                 drawBorder: false,
-                                 borderColor: borderColor
-                             },
-                             ticks: {
-                                 stepSize: 100,
-                                 color: labelColor
+                         scales: {
+                             y: {
+                                 beginAtZero: true,
+                                 ticks: {
+                                     callback: function(value) {
+                                         return 'Rp ' + value.toLocaleString('id-ID');
+                                     }
+                                 }
                              }
                          }
                      }
-                 }
-             });
-         }
-     </script>
- @endsection
+                 });
+             </script>
+         @endsection

@@ -1,7 +1,7 @@
 <!-- Menu -->
 <aside id="layout-menu" class="layout-menu menu-vertical menu" data-bs-theme="dark">
     <div class="app-brand demo ">
-        <a href="index.html" class="app-brand-link">
+        <a href="{{ url('/') }}" class="app-brand-link">
             <span class="app-brand-logo demo">
                 <span class="text-primary">
                     <svg width="32" height="22" viewBox="0 0 32 22" fill="none"
@@ -19,7 +19,7 @@
                     </svg>
                 </span>
             </span>
-            <span class="app-brand-text demo menu-text fw-bold ms-3">Portos</span>
+            <span class="app-brand-text demo menu-text fw-bold ms-3">WARKOPOS</span>
         </a>
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
             <i class="icon-base ti menu-toggle-icon d-none d-xl-block"></i>
@@ -29,7 +29,7 @@
     <div class="menu-inner-shadow"></div>
     <ul class="menu-inner py-1">
         <li class="menu-item {{ request()->routeIs('home') ? 'active' : '' }}">
-            <a href="" class="menu-link">
+            <a href="{{ url('/') }}" class="menu-link">
                 <i class="menu-icon icon-base ti tabler-smart-home"></i>
                 <div data-i18n="Dashboard">Dashboard</div>
             </a>

@@ -23,6 +23,12 @@
     </a>
 </li>
 <li class="menu-item">
+    <a href="{{ route('master_user.index') }}" class="menu-link">
+        <i class="menu-icon icon-base ti tabler-smart-home"></i>
+        <div>Master User</div>
+    </a>
+</li>
+<li class="menu-item">
     <a href="#" class="menu-link">
         <i class="menu-icon icon-base ti tabler-smart-home"></i>
         <div>Profil</div>

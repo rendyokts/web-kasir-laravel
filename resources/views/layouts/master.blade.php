@@ -35,5 +35,5 @@
 		
         @include('layouts.scripts')
 	</body>
-</html>
+	</html>
 <!-- beautify ignore:end -->
