@@ -16,7 +16,8 @@ class MasterUserController extends Controller
         // Melakukan query
         $query = MasterUserModel::select('*')->get();
         // -> digunakan untuk debugging sebelum menampilkan datanya pada table,
-        // dd($query); 
+        // dd($query);
+        //debugging 
         return view('master_user.index', compact('query'));
         //view disini mengarah ke file (.) titik menandakan folder jadi dibaca folder master_user, file nya index
     }
@@ -33,7 +34,7 @@ class MasterUserController extends Controller
     {
         // mandatori berarti harus diisi jika tidak mandatori atau nullable, tidak perlu declare disini
         $mandatory = [
-            'name'       => 'required',
+            'name'       => 'required', // Required artinya diisi
             'username'   => 'required',
             'status'     => 'required',
             'role'       => 'required',
@@ -69,7 +70,7 @@ class MasterUserController extends Controller
         // ini adalah inputan user, berkaitan dengan form di tampilan
         $data->name = $request->input('name');
         $data->username = $request->input('username');
-        $data->telepon = $request->input('telepon');
+        $data->telp = $request->input('telepon');
         $data->email = $request->input('email');
         $data->role = $request->input('role');
         $data->status = $request->input('status');
