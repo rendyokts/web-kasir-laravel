@@ -2,7 +2,6 @@
 @section('page-css')
 @endsection
 
-
 @section('content')
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
@@ -15,7 +14,9 @@
                         <div class="card-body">
                             <form method="post" action="{{ route('master_user.save') }}" id="formUser">
                                 @csrf
+                                {{-- Cross Site Resource Forgery --}}
                                 <input type="hidden" name="id" value="{{ $data->id ?? '' }}">
+                                {{-- Input hidden jangan lupa ditambahkan untuk melakukan pengecekan id apabila sudah ada maka bisa dilakukan edit, jika kosong akan dilakukan tambah user --}}
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="mb-6">

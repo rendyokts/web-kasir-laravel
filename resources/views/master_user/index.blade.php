@@ -20,10 +20,12 @@
 
                         <!-- Card Header -->
                         <div class="card-header d-flex justify-content-between align-items-center border-bottom">
-                            <h5 class="card-title m-0">Master User Management</h5>
+                            <h5 class="card-title m-0">Master User Management</h5> 
+                            {{-- Ubah bagian atas untuk header --}}
                             <a href="{{ route('master_user.add_user') }}" class="btn btn-primary">
                                 Tambah User
                             </a>
+                            {{-- Button nya --}}
                         </div>
 
                         <!-- Alert -->
@@ -59,11 +61,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {{-- CLIENT SIDE --}}
+                                    {{-- Looping Foreach --}}
                                     @foreach ($query as $q)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
+                                            {{-- Looping Nomor --}}
                                             <td>{{ $q->name }}</td>
-                                            <td>{{ $q->telepon }}</td>
+                                            <td>{{ $q->telp }}</td>
                                             <td>{{ $q->email }}</td>
                                             @php
                                                 $statusLabels = [
