@@ -65,15 +65,15 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="mb-6">
-                                            <label class="form-label" for="telepon">Telepon <span
+                                            <label class="form-label" for="telp">telp <span
                                                     class="text-danger">*</span></label>
                                             <div class="input-group input-group-merge">
-                                                <span id="telepon2" class="input-group-text"><i
+                                                <span id="telp2" class="input-group-text"><i
                                                         class="icon-base ti tabler-phone"></i></span>
-                                                <input type="text" id="telepon" name="telepon"
+                                                <input type="text" id="telp" name="telp"
                                                     class="form-control phone-mask" placeholder="08 799 8941"
-                                                    aria-label="0858 799 8941" aria-describedby="telepon2" required
-                                                    value="{{ old('telepon', $data->telepon ?? '') }}" />
+                                                    aria-label="0858 799 8941" aria-describedby="telp2" required
+                                                    value="{{ old('telp', $data->telp ?? '') }}" />
                                             </div>
                                         </div>
                                     </div>
