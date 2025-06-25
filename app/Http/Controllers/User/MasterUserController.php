@@ -39,7 +39,7 @@ class MasterUserController extends Controller
             'status'     => 'required',
             'role'       => 'required',
             'email'      => 'required',
-            'telepon'    => 'required'
+            'telp'    => 'required'
         ];
 
         // dilakukan pengecekan daripada input di mandatory apakah sudah diisi atau belum oleh user
@@ -48,7 +48,7 @@ class MasterUserController extends Controller
             'username.required' => 'Username wajib diisi',
             'status.required'   => 'Status user wajib diisi',
             'email.required'    => 'Email wajib diisi',
-            'telepon.required'  => 'Nomor telpon wajib diisi'
+            'telp.required'  => 'Nomor telpon wajib diisi'
         ]);
 
         if ($validator->fails()) {
@@ -70,14 +70,14 @@ class MasterUserController extends Controller
         // ini adalah inputan user, berkaitan dengan form di tampilan
         $data->name = $request->input('name');
         $data->username = $request->input('username');
-        $data->telp = $request->input('telepon');
+        $data->telp = $request->input('telp');
         $data->email = $request->input('email');
         $data->role = $request->input('role');
         $data->status = $request->input('status');
         $data->password = '$2y$10$9RXeWXWAt1uZ7zO8DGn1d.MBuWB0iNkRDYXjmmv1qwTMvQPZ8gJFi';
         $data->save(); //disimpan ke database dengan nama table users yang ada di MasterUserModel --> models nya
 
-        return redirect()->route('master_user.index')->with('toast_success', 'Data user berhasil disimpan');
+        return redirect()->route('master_user.index')->with('toast_success', 'Data user berhasil disimpan')->with('user_saved', $data);;
     }
 
     // function mengubah user
@@ -86,5 +86,13 @@ class MasterUserController extends Controller
         //dilakukan pencarian dulu by id
         $data = MasterUserModel::find($id);
         return view('master_user.add_user', compact('data'));
+    }
+
+    public function deleteUser($id)
+    {
+        $data = MasterUserModel::findOrFail($id);
+        $data->delete();
+
+        return redirect()->back()->with('success', 'User berhasil dihapus');
     }
 }

@@ -12,6 +12,32 @@
 @endsection
 
 @section('content')
+    @if (session('user_saved'))
+        <!-- Modal -->
+        <div class="modal fade" id="userSavedModal" tabindex="-1" aria-labelledby="userSavedModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title" id="userSavedModalLabel">User Berhasil Disimpan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Nama:</strong> {{ session('user_saved')->name }}</p>
+                        <p><strong>Username:</strong> {{ session('user_saved')->username }}</p>
+                        <p><strong>Email:</strong> {{ session('user_saved')->email }}</p>
+                        <p><strong>Telp:</strong> {{ session('user_saved')->telp }}</p>
+                        <p><strong>Role:</strong> {{ session('user_saved')->role }}</p>
+                        <p><strong>Status:</strong> {{ session('user_saved')->status == 1 ? 'Aktif' : 'Non-Aktif' }}</p>
+                        <p><strong>Password: </strong>123</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
             <div class="row">
@@ -20,7 +46,7 @@
 
                         <!-- Card Header -->
                         <div class="card-header d-flex justify-content-between align-items-center border-bottom">
-                            <h5 class="card-title m-0">Master User Management</h5> 
+                            <h5 class="card-title m-0">Master User Management</h5>
                             {{-- Ubah bagian atas untuk header --}}
                             <a href="{{ route('master_user.add_user') }}" class="btn btn-primary">
                                 Tambah User
@@ -45,6 +71,11 @@
                                 {{ session('toast_error') }}
                             </div>
                         @endif
+                        <form id="formDeleteUser" method="POST" style="display: none;">
+                            @csrf
+                            @method('DELETE')
+                        </form>
+
 
                         <!-- Table -->
                         <div class="card-body table-responsive">
@@ -88,6 +119,9 @@
                                             <td>
                                                 <a href="{{ route('master_user.edit', ['id' => $q->id]) }}"
                                                     class="btn btn-warning btn-sm">Ubah</a>
+                                                <a href="javascript:void(0);" data-id="{{ $q->id }}"
+                                                    class="btn btn-danger btn-sm btn-delete">Hapus</a>
+
                                             </td>
                                         </tr>
                                     @endforeach
@@ -106,4 +140,35 @@
     <script src="{{ asset('portos/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.js') }}"></script>
     <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
     <script src="{{ asset('portos/assets/js/tables-datatables-basic.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.querySelectorAll('.btn-delete').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const userId = this.getAttribute('data-id');
+                Swal.fire({
+                    title: 'Yakin ingin menghapus?',
+                    text: "Data yang dihapus tidak bisa dikembalikan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        const form = document.getElementById('formDeleteUser');
+                        form.setAttribute('action', `/delete/${userId}`);
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+    @if (session('user_saved'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const modal = new bootstrap.Modal(document.getElementById('userSavedModal'));
+                modal.show();
+            });
+        </script>
+    @endif
 @endsection
