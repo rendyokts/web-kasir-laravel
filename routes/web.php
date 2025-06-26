@@ -20,5 +20,6 @@ include_once('farel.php');
 include_once('ilham.php');
 include_once('rakha.php');
 include_once('habib.php');
-include_once('rendy.php');
+include_once('rendi.php');
 include_once('dimas.php');
+
