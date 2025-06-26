@@ -28,7 +28,6 @@
                         <p><strong>Telp:</strong> {{ session('user_saved')->telp }}</p>
                         <p><strong>Role:</strong> {{ session('user_saved')->role }}</p>
                         <p><strong>Status:</strong> {{ session('user_saved')->status == 1 ? 'Aktif' : 'Non-Aktif' }}</p>
-                        <p><strong>Password: </strong>123</p>
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
