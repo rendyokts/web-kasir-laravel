@@ -18,7 +18,7 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header bg-success text-white">
-                        <h5 class="modal-title" id="userSavedModalLabel">User Berhasil Disimpan</h5>
+                        <h5 class="modal-title" id="userSavedModalLabel">Kategori Berhasil Disimpan</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
                     </div>
                     <div class="modal-body">
@@ -45,10 +45,10 @@
 
                         <!-- Card Header -->
                         <div class="card-header d-flex justify-content-between align-items-center border-bottom">
-                            <h5 class="card-title m-0">Master User Management</h5>
+                            <h5 class="card-title m-0">Master Category</h5>
                             {{-- Ubah bagian atas untuk header --}}
-                            <a href="{{ route('master_user.add_user') }}" class="btn btn-primary">
-                                Tambah User
+                            <a href="{{ route('master_category.add_category') }}" class="btn btn-primary">
+                                Tambah Kategori
                             </a>
                             {{-- Button nya --}}
                         </div>
@@ -82,14 +82,12 @@
                                 <thead>
                                     <tr>
                                         <th width="10">No</th>
-                                        <th>Nama</th>
-                                        <th>Telepon</th>
-                                        <th>Email</th>
-                                        <th>Status</th>
-                                        <th>Role</th>
+                                        <th>Kode Kategori</th>
+                                        <th>Nama Kategori</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
+
                                 <tbody>
                                     {{-- CLIENT SIDE --}}
                                     {{-- Looping Foreach --}}
@@ -97,30 +95,13 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             {{-- Looping Nomor --}}
-                                            <td>{{ $q->name }}</td>
-                                            <td>{{ $q->telp }}</td>
-                                            <td>{{ $q->email }}</td>
-                                            @php
-                                                $statusLabels = [
-                                                    1 => ['class' => 'success', 'text' => 'Aktif'],
-                                                    2 => ['class' => 'danger', 'text' => 'Tidak Aktif'],
-                                                ];
-                                                $status = $statusLabels[$q->status];
-                                                $roleLabels = [
-                                                    'kasir' => ['class' => 'secondary', 'text' => 'Kasir'],
-                                                    'admin' => ['class' => 'info', 'text' => 'Admin'],
-                                                ];
-                                                $role = $roleLabels[$q->role];
-                                            @endphp
-                                            <td><span class="badge bg-{{ $status['class'] }}">{{ $status['text'] }}</span>
-                                            </td>
-                                            <td><span class="badge bg-{{ $role['class'] }}">{{ $role['text'] }}</span>
+                                            <td>{{ $q->kode_kategori }}</td>
+                                            <td>{{ $q->nama }}</td>
                                             <td>
-                                                <a href="{{ route('master_user.edit', ['id' => $q->id]) }}"
+                                                <a href="{{ route('master_category.edit', ['id' => $q->id]) }}"
                                                     class="btn btn-warning btn-sm">Ubah</a>
                                                 <a href="javascript:void(0);" data-id="{{ $q->id }}"
                                                     class="btn btn-danger btn-sm btn-delete">Hapus</a>
-
                                             </td>
                                         </tr>
                                     @endforeach
@@ -155,7 +136,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         const form = document.getElementById('formDeleteUser');
-                        form.setAttribute('action', `/delete/${userId}`);
+                        form.setAttribute('action', `/delete_category/${userId}`);
                         form.submit();
                     }
                 });
