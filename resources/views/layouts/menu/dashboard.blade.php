@@ -11,7 +11,7 @@
     </a>
 </li>
 <li class="menu-item">
-    <a href="#" class="menu-link">
+    <a href="{{ route('master_category.index') }}" class="menu-link">
         <i class="menu-icon icon-base ti tabler-database"></i>
         <div>Master Kategori</div>
     </a>
