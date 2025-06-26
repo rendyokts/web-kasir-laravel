@@ -28,25 +28,44 @@ class LoginController extends Controller
             'login' => 'required',
             'password' => 'required',
         ],[
-            'login.required' => 'Username/Email kamu kosong nichh',
-            'password.required' => 'Upss.... masih kosong nichh',
+            'login.required' => 'Username/Email kamu kosong nihh',
+            'password.required' => 'Upss.... passwordnya masih kosong nihh',
         ]);
 
         $login_type = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-        $infoLogin =[
-            $login_type => $request -> login,
-            'password' => $request -> password,
-        ];
-         if (Auth::attempt($infoLogin)) {
+        $user = User::where($login_type, $request->login)->where('status',1)->first();
+
+        if ($user && Hash::check($request->password,$user->password)) {
+            Auth::login($user);
             $request->session()->regenerate();
             return redirect()->intended(route('dashboard'));
         } else {
-            return back()->withErrors([
-        'login' => 'Login gagal, cek lagi email/username dan password borr.',
-    ]);
+            $userExists = User::where($login_type, $request->login)->first();
 
+            if ($userExists && Hash::check($request->password,$userExists->password)) {
+                return back()->withErrors([
+                    'login'=> 'Akun anda sudah tidak aktif. Silahkan hubungi admin',
+                ]);
+            } else {
+                return back()->withErrors([
+                    'login' => 'login gagal, cek lagi email/username dan passwordnya',
+                ]);
+            }
         }
+
+    //     $infoLogin =[
+    //         $login_type => $request -> login,
+    //         'password' => $request -> password,
+    //     ];
+    //      if (Auth::attempt($infoLogin)) {
+    //         $request->session()->regenerate();
+    //         return redirect()->intended(route('dashboard'));
+    //     } else {
+    //         return back()->withErrors([
+    //     'login' => 'Login gagal, cek lagi email/username dan password borr.',
+    // ]);
+    //     }
     }
 
     public function logout()
@@ -116,7 +135,7 @@ class LoginController extends Controller
         );
 
         return $status === Password::ResetLinkSent
-        ? back()->with('status','Silahkan cek email anda untuk membuat password baru')
+        ? back()->with('success','Silahkan cek email anda untuk membuat password baru')
         : back()->withErrors(['email'=> __($status)]);
     }
 
@@ -148,7 +167,7 @@ class LoginController extends Controller
         );
 
         return $status === Password::PasswordReset
-        ? redirect()->route('login')->with('status','Password berhasil di ubah!!')
+        ? redirect()->route('login')->with('success','Password berhasil di ubah!!')
         : back()->withErrors(['email' => [__($status)]]);
     }
 }
