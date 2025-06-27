@@ -9,4 +9,10 @@ class MasterCategoryModel extends Model
     protected $table = 'kategori';
 
     protected $guarded = 'id';
+
+    public function produk()
+    {
+        return $this->hasMany(MasterProdukModel::class);
+    }
 }
+

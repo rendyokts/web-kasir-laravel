@@ -5,7 +5,7 @@
     </a>
 </li>
 <li class="menu-item">
-    <a href="#" class="menu-link">
+    <a href="{{ route('master_produk.index') }}" class="menu-link">
         <i class="menu-icon icon-base ti tabler-database"></i>
         <div>Master Produk</div>
     </a>
@@ -30,6 +30,11 @@
         </a>
     </li>
 @endif
+<li class="menu-item">
+    <a href="laporan keuangan" class="menu-link">
+        <i class="menu-icon icon-base ti tabler-report-analytics"></i>
+        <div>Laporan Pengeluaran</div>
+    </a>
 <li class="menu-item">
     <a href="#" class="menu-link">
         <i class="menu-icon icon-base ti tabler-user"></i>
