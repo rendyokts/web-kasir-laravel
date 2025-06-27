@@ -31,6 +31,11 @@
     </li>
 @endif
 <li class="menu-item">
+    <a href="laporan keuangan" class="menu-link">
+        <i class="menu-icon icon-base ti tabler-report-analytics"></i>
+        <div>Laporan Pengeluaran</div>
+    </a>
+<li class="menu-item">
     <a href="#" class="menu-link">
         <i class="menu-icon icon-base ti tabler-user"></i>
         <div>Profil</div>
