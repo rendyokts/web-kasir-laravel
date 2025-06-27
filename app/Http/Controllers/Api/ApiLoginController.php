@@ -20,31 +20,29 @@ class ApiLoginController extends Controller
         ]);
 
         try {
-            // Tentukan apakah login menggunakan email atau username
             $login_type = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-            // Cari user yang aktif (status = 1)
             $user = MasterUserModel::where($login_type, $request->login)
                 ->where('status', 1)
                 ->first();
 
             if ($user && Hash::check($request->password, $user->password)) {
-                // Login berhasil - buat token
                 $token = $user->createToken('auth_token')->plainTextToken;
 
                 return response()->json([
                     'success' => true,
                     'message' => 'Login berhasil',
                     'data' => [
-                        'user' => [
-                            'id' => $user->id,
-                            'name' => $user->name,
-                            'email' => $user->email,
-                            'username' => $user->username ?? null,
-                        ],
-                        'token' => $token,
-                        'token_type' => 'Bearer'
-                    ]
+                        'id' => $user->id,
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'username' => $user->username ?? null,
+                        'telp' => $user->telp ?? null,
+                        'role' => $user->role,
+                        'status' => $user->status == 1 ? 'Aktif' : 'Tidak Aktif'
+                    ],
+                    'token' => $token,
+                    'token_type' => 'Bearer'
                 ], 200);
             } else {
                 // Cek apakah user ada tapi tidak aktif
