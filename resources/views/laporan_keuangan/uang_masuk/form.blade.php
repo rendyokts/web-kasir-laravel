@@ -22,7 +22,7 @@
                         </div>
                         <div class="card-body">
                             <form method="post" action="{{ route('laporan_keuangan.tambah_pemasukan.save') }}"
-                                id="formUser">
+                                id="formUser" enctype="multipart/form-data">
                                 @csrf
                                 {{-- Cross Site Resource Forgery --}}
                                 <input type="hidden" name="id" value="{{ $data->id ?? '' }}">
@@ -30,37 +30,73 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="mb-6">
-                                            <label class="form-label" for="username">Kode Kategori <span
+                                            <label class="form-label" for="tanggal">Tanggal Uang Masuk <span
                                                     class="text-danger">*</span></label>
                                             <div class="input-group input-group-merge">
-                                                <span id="username2" class="input-group-text"><i
-                                                        class="icon-base ti tabler-category"></i></span>
-                                                <input type="text" id="kode_kategori" name="kode_kategori"
-                                                    class="form-control" placeholder="Kode Kategori"
-                                                    aria-label="Kode Kategori" required
-                                                    value="{{ old('kode_kategori', $data->kode_kategori ?? '') }}"
-                                                    aria-describedby="username2" />
+                                                <span id="tanggal2" class="input-group-text"><i
+                                                        class="icon-base ti tabler-calendar"></i></span>
+                                                <input type="date" id="tanggal" name="tanggal" class="form-control"
+                                                    required value="{{ old('tanggal', $data->tanggal ?? '') }}" autofocus />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="mb-6">
-                                            <label class="form-label" for="name">Nama Kategori <span
+                                            <label class="form-label" for="keterangan">Keterangan<span
                                                     class="text-danger">*</span></label>
                                             <div class="input-group input-group-merge">
-                                                <span id="name2" class="input-group-text"><i
+                                                <span id="keterangan" class="input-group-text"><i
                                                         class="icon-base ti tabler-pencil"></i></span>
-                                                <input type="text" class="form-control" name="nama" id="nama"
-                                                    placeholder="Nama Kategori" aria-label="Nama Kategori" autofocus
-                                                    required aria-describedby="name2"
-                                                    value="{{ old('nama', $data->nama ?? '') }}" />
+                                                <input type="text" class="form-control" name="keterangan" id="keterangan"
+                                                    placeholder="Keterangan" required aria-describedby="keterangan"
+                                                    value="{{ old('keterangan', $data->keterangan ?? '') }}" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="mb-6">
+                                            <label class="form-label" for="jumlah">Jumlah Uang Masuk<span
+                                                    class="text-danger">*</span></label>
+                                            <div class="input-group input-group-merge">
+                                                <span id="jumlah2" class="input-group-text"><i
+                                                        class="icon-base ti tabler-cash-register"></i></span>
+                                                <input type="text" id="jumlah" name="jumlah" class="form-control"
+                                                    required placeholder="Rp"
+                                                    value="{{ number_format(old('jumlah', $data->jumlah, 0, ',', '.' ?? '')) }}"
+                                                    aria-describedby="jumlah" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-6">
+                                            <label class="form-label" for="file_lampiran">File Lampiran<span
+                                                    class="text-danger">*</span></label>
+                                            <div class="input-group input-group-merge">
+                                                <span id="file_lampiran2" class="input-group-text"><i
+                                                        class="icon-base ti tabler-file"></i></span>
+                                                <input type="file" id="file_lampiran" name="file_lampiran"
+                                                    class="form-control" @if (!isset($data)) required @endif
+                                                    aria-describedby="file_lampiran" />
+                                            </div>
+
+                                            @if (isset($data) && $data->file_lampiran)
+                                                <div class="mt-2">
+                                                    <a href="{{ asset('storage/' . $data->file_lampiran) }}" target="_blank"
+                                                        class="btn btn-info btn-sm">
+                                                        <i class="icon-base ti tabler-download"></i> Download Lampiran Lama
+                                                    </a>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                </div>
 
                                 <button type="button" class="btn btn-primary btn-sm" id="btnSimpan">Simpan</button>
-                                <a href="{{ route('master_category.index') }}" class="btn btn-danger btn-sm">Kembali</a>
+                                <a href="{{ route('laporan_keuangan.uang_masuk') }}"
+                                    class="btn btn-danger btn-sm">Kembali</a>
                             </form>
                         </div>
                     </div>
@@ -87,6 +123,21 @@
                     document.getElementById('formUser').submit();
                 }
             });
+        });
+    </script>
+    <script>
+        // Format input uang saat diketik
+        const inputJumlah = document.getElementById('jumlah');
+
+        inputJumlah.addEventListener('input', function(e) {
+            let value = this.value.replace(/\D/g, ''); // Hapus semua non-digit
+            if (!value) {
+                this.value = '';
+                return;
+            }
+
+            // Format ribuan pakai titik
+            this.value = new Intl.NumberFormat('id-ID').format(value);
         });
     </script>
 @endsection

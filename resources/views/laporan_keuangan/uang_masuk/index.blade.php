@@ -53,28 +53,46 @@
                                 <thead>
                                     <tr>
                                         <th width="10">No</th>
-                                        <th>Kode Kategori</th>
-                                        <th>Nama Kategori</th>
+                                        <th>Tanggal</th>
+                                        <th>Jenis</th>
+                                        <th>Keterangan</th>
+                                        <th>Jumlah</th>
+                                        <th>File Lampiran</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    {{-- CLIENT SIDE --}}
-                                    {{-- Looping Foreach --}}
-                                    {{-- @foreach ($query as $q)
+                                    @php use Illuminate\Support\Str; @endphp
+                                    @foreach ($query as $q)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $q->kode_kategori }}</td>
-                                            <td>{{ $q->nama }}</td>
+                                            <td>{{ $q->tanggal }}</td>
+                                            <td>{{ Str::ucfirst($q->jenis) }}</td>
+                                            <td>{{ $q->keterangan }}</td>
+                                            <td>Rp {{ number_format($q->jumlah, 0, ',', '.') }}
+                                            </td>
                                             <td>
-                                                <a href="{{ route('master_category.edit', ['id' => $q->id]) }}"
+                                                <a href="{{ asset('storage/' . $q->file_lampiran) }}" target="_blank"><i
+                                                        class="icon-base ti tabler-file"></i> <span
+                                                        class="badge bagde-success">File Lampiran</span></a>
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('laporan_keuangan.ubah_pemasukan.edit', ['id' => $q->id]) }}"
                                                     class="btn btn-warning btn-sm">Ubah</a>
-                                                <a href="javascript:void(0);" data-id="{{ $q->id }}"
-                                                    class="btn btn-danger btn-sm btn-delete">Hapus</a>
+                                                <form
+                                                    action="{{ route('laporan_keuangan.hapus_pemasukan.delete', $q->id) }}"
+                                                    method="POST" class="d-inline form-delete">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button"
+                                                        class="btn btn-danger btn-sm btn-delete">Hapus</button>
+                                                </form>
+
+
                                             </td>
                                         </tr>
-                                    @endforeach --}}
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -93,8 +111,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.querySelectorAll('.btn-delete').forEach(function(button) {
-            button.addEventListener('click', function() {
-                const userId = this.getAttribute('data-id');
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                const form = this.closest('form');
                 Swal.fire({
                     title: 'Yakin ingin menghapus?',
                     text: "Data yang dihapus tidak bisa dikembalikan!",
@@ -105,8 +124,6 @@
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        const form = document.getElementById('formDeleteUser');
-                        form.setAttribute('action', `/delete_category/${userId}`);
                         form.submit();
                     }
                 });
