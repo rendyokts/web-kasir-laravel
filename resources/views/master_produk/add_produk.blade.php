@@ -21,7 +21,7 @@
                             </div>
                         @endif
                         <div class="card-body">
-                            <form method="post" action="{{ route('master_produk.save') }}" id="formProduk">
+                            <form method="post" action="{{ route('master_produk.save') }}" id="formProduk" enctype="multipart/form-data">
                                 @csrf
                                 {{-- Cross Site Resource Forgery --}}
                                 <input type="hidden" name="id" value="{{ $data->id ?? '' }}">
@@ -103,6 +103,28 @@
                                                     aria-describedby="stok2" required
                                                     value="{{ old('telp', $data->stok ?? '') }}" />
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-6">
+                                            <label class="form-label" for="gambar_produk">Gambar Barang<span
+                                                    class="text-danger">*</span></label>
+                                            <div class="input-group input-group-merge">
+                                                <span id="gambar_produk2" class="input-group-text"><i
+                                                        class="icon-base ti tabler-file"></i></span>
+                                                <input type="file" id="gambar_produk" name="gambar_produk"
+                                                    class="form-control" @if (!isset($data)) required @endif
+                                                    aria-describedby="gambar_produk"/>
+                                            </div>
+
+                                            @if (isset($data) && $data->gambar_produk)
+                                                <div class="mt-2">
+                                                    <a href="{{ asset('storage/' . $data->gambar_produk) }}" target="_blank"
+                                                        class="btn btn-info btn-sm">
+                                                        <i class="icon-base ti tabler-download"></i> Download Gambar
+                                                    </a>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
