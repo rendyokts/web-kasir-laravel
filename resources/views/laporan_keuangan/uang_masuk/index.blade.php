@@ -23,11 +23,11 @@
                             <h5 class="card-title m-0">Pemasukan</h5>
                             {{-- Ubah bagian atas untuk header --}}
                             <div class="d-flex gap-2">
+                                <a href="{{ route('laporan_keuangan.index') }}" class="btn btn-danger">Kembali</a>
                                 <a href="{{ route('laporan_keuangan.tambah_pemasukan') }}" class="btn btn-primary">
                                     Tambah Uang Masuk
                                 </a>
                             </div>
-
                         </div>
 
                         @if (session('toast_success'))
@@ -45,7 +45,6 @@
                             @csrf
                             @method('DELETE')
                         </form>
-
 
                         <!-- Table -->
                         <div class="card-body table-responsive">
@@ -88,8 +87,6 @@
                                                     <button type="button"
                                                         class="btn btn-danger btn-sm btn-delete">Hapus</button>
                                                 </form>
-
-
                                             </td>
                                         </tr>
                                     @endforeach
