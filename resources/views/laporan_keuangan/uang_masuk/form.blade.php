@@ -9,7 +9,7 @@
                 <div class="col-xl">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Manajemen Kategori</h5>
+                            <h5 class="mb-0">Laporan Uang Masuk</h5>
                             @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul class="d-flex flex-column justify-start align-content-center mb-1 p-0">
