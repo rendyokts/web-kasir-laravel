@@ -23,7 +23,7 @@
                             <h5 class="card-title m-0">Pengeluaran</h5>
                             {{-- Ubah bagian atas untuk header --}}
                             <div class="d-flex gap-2">
-                                <a href="{{ route('master_category.add_category') }}" class="btn btn-danger">
+                                <a href="{{ route('laporan_keuangan.tambah_pengeluaran') }}" class="btn btn-danger">
                                     Tambah Uang Keluar
                                 </a>
                             </div>
@@ -53,8 +53,10 @@
                                 <thead>
                                     <tr>
                                         <th width="10">No</th>
-                                        <th>Kode Kategori</th>
-                                        <th>Nama Kategori</th>
+                                        <th>Tanggal</th>
+                                        <th>Jenis</th>
+                                        <th>Jumlah</th>
+                                        <th>File Lampiran</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
