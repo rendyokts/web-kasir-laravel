@@ -24,8 +24,7 @@
                             <form method="post" action="{{ route('laporan_keuangan.tambah_pengeluaran.save') }}"
                                 id="formUser" enctype="multipart/form-data">
                                 @csrf
-                                {{-- Cross Site Resource Forgery --}}
-                                <input type="hidden" name="id" value="{{ $data->id ?? '' }}">
+                                <input type="hidden" name="id" value="">
                                 {{-- Input hidden jangan lupa ditambahkan untuk melakukan pengecekan id apabila sudah ada maka bisa dilakukan edit, jika kosong akan dilakukan tambah user --}}
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -36,7 +35,7 @@
                                                 <span id="tanggal2" class="input-group-text"><i
                                                         class="icon-base ti tabler-calendar"></i></span>
                                                 <input type="date" id="tanggal" name="tanggal" class="form-control"
-                                                    required value="{{ old('tanggal', $data->tanggal ?? '') }}" autofocus />
+                                                    required value="" autofocus />
                                             </div>
                                         </div>
                                     </div>
@@ -49,7 +48,7 @@
                                                         class="icon-base ti tabler-pencil"></i></span>
                                                 <input type="text" class="form-control" name="keterangan" id="keterangan"
                                                     placeholder="Keterangan" required aria-describedby="keterangan"
-                                                    value="{{ old('keterangan', $data->keterangan ?? '') }}" />
+                                                    value="" />
                                             </div>
                                         </div>
                                     </div>
@@ -64,7 +63,7 @@
                                                         class="icon-base ti tabler-cash-register"></i></span>
                                                 <input type="text" id="jumlah" name="jumlah" class="form-control"
                                                     required placeholder="Rp"
-                                                    value="{{ number_format(old('jumlah', $data->jumlah, 0, ',', '.' ?? '')) }}"
+                                                    value=""
                                                     aria-describedby="jumlah" />
                                             </div>
                                         </div>
@@ -81,21 +80,21 @@
                                                     aria-describedby="file_lampiran" />
                                             </div>
 
-                                            @if (isset($data) && $data->file_lampiran)
-                                                <div class="mt-2">
+                                            {{-- @if (isset($data) && $data->file_lampiran) --}}
+                                                {{-- <div class="mt-2">
                                                     <a href="{{ asset('storage/' . $data->file_lampiran) }}" target="_blank"
                                                         class="btn btn-info btn-sm">
                                                         <i class="icon-base ti tabler-download"></i> Download Lampiran Lama
                                                     </a>
-                                                </div>
-                                            @endif
+                                                </div> --}}
+                                            {{-- @endif --}}
                                         </div>
                                     </div>
 
                                 </div>
 
                                 <button type="button" class="btn btn-primary btn-sm" id="btnSimpan">Simpan</button>
-                                <a href="{{ route('laporan_keuangan.uang_masuk') }}"
+                                <a href="{{ route('laporan_keuangan.uang_keluar') }}"
                                     class="btn btn-danger btn-sm">Kembali</a>
                             </form>
                         </div>
