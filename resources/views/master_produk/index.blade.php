@@ -23,29 +23,6 @@
             });
         </script>
     @endif
-    @if (session('produk_saved'))
-        <!-- Modal -->
-        <div class="modal fade" id="userSavedModal" tabindex="-1" aria-labelledby="userSavedModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header bg-success text-white">
-                        <h5 class="modal-title" id="userSavedModalLabel">Produk Berhasil Disimpan</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p><strong>Kode Barang:</strong> {{ session('produk_saved')->kode_barang }}</p>
-                        <p><strong>Name:</strong> {{ session('produk_saved')->nama_barang }}</p>
-                        <p><strong>Kategori:</strong> {{ session('produk_saved')->kategori->nama ?? '-' }}</p>
-                        <p><strong>Harga:</strong> {{ session('produk_saved')->harga_barang }}</p>
-                        <p><strong>Stok:</strong> {{ session('produk_saved')->stok }}</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
 
     <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
@@ -93,7 +70,8 @@
                                     <tr>
                                         <th width="10">No</th>
                                         <th>Kode Barang</th>
-                                        <th>Name</th>
+                                        <th>Nama Barang</th>
+                                        <th>Gambar</th>
                                         <th>Kategori</th>
                                         <th>Harga</th>
                                         <th>Stok</th>
@@ -109,6 +87,11 @@
                                             {{-- Looping Nomor --}}
                                             <td>{{ $q->kode_barang }}</td>
                                             <td>{{ $q->nama_barang }}</td>
+                                            <td>
+                                                <img src="{{ asset('storage/' . $q->gambar_produk) }}" alt="Gambar Produk"
+                                                    width="60" height="60"
+                                                    style="object-fit: cover; border-radius: 4px;">
+                                            </td>
                                             <td>{{ $q->kategori->nama ?? '-' }}</td>
                                             <td>{{ number_format($q->harga_barang, 0, ',', '.') }}</td>
                                             <td>{{ $q->stok }}</td>
