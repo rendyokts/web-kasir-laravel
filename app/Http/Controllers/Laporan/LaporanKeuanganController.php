@@ -27,8 +27,8 @@ class LaporanKeuanganController extends Controller
 
     public function uang_keluar()
     {
-        $query = LaporanKeuanganModel::select('*')->where('jenis', 'masuk')->where('status', 1)->get();
-        return view('laporan_keuangan.uang_keluar.index');
+        $query = LaporanKeuanganModel::select('*')->where('jenis', 'keluar')->where('status', 1)->get();
+        return view('laporan_keuangan.uang_keluar.index', compact('query'));
     }
 
     public function index_uang_masuk()
@@ -109,12 +109,12 @@ class LaporanKeuanganController extends Controller
     {
 
         $data = LaporanKeuanganModel::where('status', 2)->get();
-        dd ($data);
+        // dd ($data);
         return view('laporan_keuangan.uang_keluar.form', compact('data'));
     }
     public function save_pengeluaran(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $mandatory = [
             'tanggal' => 'required',
             'jumlah' => 'required',

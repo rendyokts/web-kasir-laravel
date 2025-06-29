@@ -55,6 +55,7 @@
                                         <th width="10">No</th>
                                         <th>Tanggal</th>
                                         <th>Jenis</th>
+                                        <th>Keterangan</th>
                                         <th>Jumlah</th>
                                         <th>File Lampiran</th>
                                         <th>Aksi</th>
@@ -64,19 +65,33 @@
                                 <tbody>
                                     {{-- CLIENT SIDE --}}
                                     {{-- Looping Foreach --}}
-                                    {{-- @foreach ($query as $q)
+                                    @foreach ($query as $q)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $q->kode_kategori }}</td>
-                                            <td>{{ $q->nama }}</td>
+                                            <td>{{ $q->tanggal }}</td>
+                                            <td>{{ $q->jenis }}</td>
+                                            <td>{{ $q->keterangan }}</td>
+                                            <td>Rp {{ number_format($q->jumlah, 0, ',', '.') }}
+                                            </td>
                                             <td>
-                                                <a href="{{ route('master_category.edit', ['id' => $q->id]) }}"
+                                                <a href="{{ asset('storage/' . $q->file_lampiran) }}" target="_blank"><i
+                                                        class="icon-base ti tabler-file"></i> <span
+                                                        class="badge bagde-success">File Lampiran</span></a>
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('laporan_keuangan.ubah_pemasukan.edit', ['id' => $q->id]) }}"
                                                     class="btn btn-warning btn-sm">Ubah</a>
-                                                <a href="javascript:void(0);" data-id="{{ $q->id }}"
-                                                    class="btn btn-danger btn-sm btn-delete">Hapus</a>
+                                                <form
+                                                    action="{{ route('laporan_keuangan.hapus_pemasukan.delete', $q->id) }}"
+                                                    method="POST" class="d-inline form-delete">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button"
+                                                        class="btn btn-danger btn-sm btn-delete">Hapus</button>
+                                                </form>
                                             </td>
                                         </tr>
-                                    @endforeach --}}
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
