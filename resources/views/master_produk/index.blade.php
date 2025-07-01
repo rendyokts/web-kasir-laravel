@@ -93,7 +93,7 @@
                                                     style="object-fit: cover; border-radius: 4px;">
                                             </td>
                                             <td>{{ $q->kategori->nama ?? '-' }}</td>
-                                            <td>{{ number_format($q->harga_barang, 0, ',', '.') }}</td>
+                                            <td>Rp {{ number_format($q->harga_barang, 0, ',', '.') }}</td>
                                             <td>{{ $q->stok }}</td>
                                             <td>
                                                 <a href="{{ route('master_produk.edit', ['id' => $q->id]) }}"

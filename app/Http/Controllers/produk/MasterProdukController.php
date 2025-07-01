@@ -88,6 +88,7 @@ class MasterProdukController extends Controller
             $path = $file->store('gambar_produk', 'public');
             $data->gambar_produk = $path;
         }
+        $data->status = 1;
         // dd($data);
         $data->save(); //disimpan ke database dengan nama table users yang ada di MasterUserModel --> models nya
 
