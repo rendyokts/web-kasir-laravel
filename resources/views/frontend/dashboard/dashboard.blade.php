@@ -9,9 +9,10 @@
                              <span class="avatar-initial rounded bg-label-primary"><i
                                      class="icon-base ti tabler-truck icon-28px"></i></span>
                          </div>
-                         <h4 class="mb-0">42 <small>item</small></h4>
+                         <h4 class="mb-0">{{ $qtyHarian }} <small>item</small></h4>
                      </div>
-                     <p class="mb-1">Barang Terjual Harian</p>
+                     <p class="mb-1">Barang Terjual Pada</p>
+                     <div class="mb-1"> {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</div>
                      {{-- <p class="mb-0">
                          <span class="text-heading fw-medium me-2">+18.2%</span>
                          <small class="text-body-secondary">than last week</small>
@@ -27,9 +28,10 @@
                              <span class="avatar-initial rounded bg-label-warning"><i
                                      class="icon-base ti tabler-alert-triangle icon-28px"></i></span>
                          </div>
-                         <h4 class="mb-0">8</h4>
+                         <h4 class="mb-0">{{ $trxHarian }}</h4>
                      </div>
                      <p class="mb-1">Penjualan Harian</p>
+                     <div class="mb-1"> {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</div>
                      {{-- <p class="mb-0">
                          <span class="text-heading fw-medium me-2">-8.7%</span>
                          <small class="text-body-secondary">than last week</small>
@@ -45,9 +47,13 @@
                              <span class="avatar-initial rounded bg-label-danger"><i
                                      class="icon-base ti tabler-git-fork icon-28px"></i></span>
                          </div>
-                         <h4 class="mb-0"><small>Rp</small> 270.000</h4>
+                         <h4 class="mb-0"><small>Rp</small> {{ number_format($transaksiHarian, 0, ',', '.') }}</h4>
                      </div>
+                     {{-- @php
+                         dd($terlaris);
+                     @endphp --}}
                      <p class="mb-1">Pendapatan Hari Ini</p>
+                     <div class="mb-1"> {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</div>
                      {{-- <p class="mb-0">
                          <span class="text-heading fw-medium me-2">+4.3%</span>
                          <small class="text-body-secondary">than last week</small>
@@ -66,6 +72,7 @@
                          <h4 class="mb-0"><small>Rp</small> 130.000</h4>
                      </div>
                      <p class="mb-1">Pengeluaran Hari Ini</p>
+                     <div class="mb-1"> {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</div>
                      {{-- <p class="mb-0">
                          <span class="text-heading fw-medium me-2">-2.5%</span>
                          <small class="text-body-secondary">than last week</small>
@@ -94,64 +101,33 @@
                  <div class="card-header d-flex justify-content-between">
                      <div class="card-title m-0 me-2">
                          <h5 class="mb-1">Paling Laris</h5>
-                         <p class="card-subtitle">Total 10 Pembeli</p>
+                         <p class="card-subtitle">Minggu Ini</p>
                      </div>
                  </div>
                  <div class="card-body">
                      <ul class="p-0 m-0">
-                         <li class="d-flex mb-6">
-                             <div class="me-4">
-                                 <img src="../../assets/img/products/iphone.png" alt="User" class="rounded"
-                                     width="46" />
-                             </div>
-                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                 <div class="me-2">
-                                     <h6 class="mb-0">Indomie Goreng</h6>
-                                     <small class="text-body d-block">Kode Barang</small>
+                         @foreach ($terlaris as $laris)
+                             <li class="d-flex mb-6">
+                                 <div class="me-4">
+                                     <img src="{{ asset('storage/' . $laris->gambar_produk) }}" alt="User"
+                                         class="rounded" width="46" />
                                  </div>
-                                 <div class="user-progress d-flex align-items-center gap-1">
-                                     <p class="mb-0">Rp 120.000</p>
+                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                     <div class="me-2">
+                                         <h6 class="mb-0">{{ $laris->nama_barang }}</h6>
+                                         <small class="text-body d-block">Total terjual: {{ $laris->total_terjual }}</small>
+                                     </div>
+                                     <div class="user-progress d-flex align-items-center gap-1">
+                                         <p class="mb-0">Rp {{ number_format($laris->harga_barang, 0, ',', '.') }}</p>
+                                     </div>
                                  </div>
-                             </div>
-                         </li>
-                         
-                         <li class="d-flex mb-6">
-                             <div class="me-4">
-                                 <img src="../../assets/img/products/iphone.png" alt="User" class="rounded"
-                                     width="46" />
-                             </div>
-                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                 <div class="me-2">
-                                     <h6 class="mb-0">Kopi Liong</h6>
-                                     <small class="text-body d-block">Kode Barang</small>
-                                 </div>
-                                 <div class="user-progress d-flex align-items-center gap-1">
-                                     <p class="mb-0">Rp 40.000</p>
-                                 </div>
-                             </div>
-                         </li>
-                         
-                         <li class="d-flex mb-6">
-                             <div class="me-4">
-                                 <img src="../../assets/img/products/iphone.png" alt="User" class="rounded"
-                                     width="46" />
-                             </div>
-                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                 <div class="me-2">
-                                     <h6 class="mb-0">Nutrisari Sirsak</h6>
-                                     <small class="text-body d-block">Kode Barang</small>
-                                 </div>
-                                 <div class="user-progress d-flex align-items-center gap-1">
-                                     <p class="mb-0">Rp 30.000</p>
-                                 </div>
-                             </div>
-                         </li>
-                         
+                             </li>
+                         @endforeach
                      </ul>
                  </div>
              </div>
-            </div>
-            @include('layouts.footer')
+         </div>
+         @include('layouts.footer')
 
          @section('page-js')
              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

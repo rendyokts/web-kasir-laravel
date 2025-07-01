@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Models\TransaksiDetailModel;
 use Illuminate\Support\Facades\Route;
 
 // Bikin View nya dulu di Resources View
@@ -10,9 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 //Users
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('frontend.dashboard.index');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 
@@ -22,4 +22,3 @@ include_once('rakha.php');
 include_once('habib.php');
 include_once('rendi.php');
 include_once('dimas.php');
-
