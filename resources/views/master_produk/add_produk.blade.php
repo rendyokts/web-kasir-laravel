@@ -82,7 +82,7 @@
                                             <div class="input-group input-group-merge">
                                                 <span id="harga_barang2" class="input-group-text"><i
                                                         class="icon-base ti tabler-coin"></i></span>
-                                                <input type="number" id="harga_barang" name="harga_barang"
+                                                <input type="text" inputmode="numeric" id="harga_barang" name="harga_barang"
                                                     class="form-control phone-mask" placeholder="1000" aria-label="1000"
                                                     aria-describedby="harga_barang2" required
                                                     value="{{ old('telp', $data->harga_barang ?? '') }}" />
@@ -157,6 +157,21 @@
                     document.getElementById('formProduk').submit();
                 }
             });
+        });
+    </script>
+    <script>
+        // Format input uang saat diketik
+        const inputJumlah = document.getElementById('harga_barang');
+
+        inputJumlah.addEventListener('input', function(e) {
+            let value = this.value.replace(/\D/g, ''); // Hapus semua non-digit
+            if (!value) {
+                this.value = '';
+                return;
+            }
+
+            // Format ribuan pakai titik
+            this.value = new Intl.NumberFormat('id-ID').format(value);
         });
     </script>
 @endsection

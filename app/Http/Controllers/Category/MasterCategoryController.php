@@ -16,7 +16,7 @@ class MasterCategoryController extends Controller
         $query = MasterCategoryModel::select('*')->get();
         // -> digunakan untuk debugging sebelum menampilkan datanya pada table,
         // dd($query);
-        //debugging 
+        //debugging
         return view('master_category.index', compact('query'));
         //view disini mengarah ke file (.) titik menandakan folder jadi dibaca folder master_user, file nya index
     }
@@ -30,7 +30,7 @@ class MasterCategoryController extends Controller
     }
 
     // function save
-    public function saveCategory(Request $request) 
+    public function saveCategory(Request $request)
     {
         // dd($request->all());
         $mandatory = [

@@ -15,3 +15,4 @@ class MasterCategoryModel extends Model
         return $this->hasMany(MasterProdukModel::class);
     }
 }
+
