@@ -24,7 +24,7 @@
                             <form method="post" action="{{ route('laporan_keuangan.tambah_pengeluaran.save') }}"
                                 id="formUser" enctype="multipart/form-data">
                                 @csrf
-                                <input type="hidden" name="id" value="">
+                                <input type="hidden" name="id" value="{{ $data->id ?? '' }}">
                                 {{-- Input hidden jangan lupa ditambahkan untuk melakukan pengecekan id apabila sudah ada maka bisa dilakukan edit, jika kosong akan dilakukan tambah user --}}
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -48,7 +48,7 @@
                                                         class="icon-base ti tabler-pencil"></i></span>
                                                 <input type="text" class="form-control" name="keterangan" id="keterangan"
                                                     placeholder="Keterangan" required aria-describedby="keterangan"
-                                                    value="" />
+                                                    value="{{ old('keterangan', $data->keterangan ?? '') }}" />
                                             </div>
                                         </div>
                                     </div>
