@@ -23,6 +23,7 @@
                             <h5 class="card-title m-0">Pengeluaran</h5>
                             {{-- Ubah bagian atas untuk header --}}
                             <div class="d-flex gap-2">
+                                <a href="{{ route('laporan_keuangan.index') }}" class="btn btn-primary">Kembali</a>
                                 <a href="{{ route('laporan_keuangan.tambah_pengeluaran') }}" class="btn btn-danger">
                                     Tambah Uang Keluar
                                 </a>
@@ -79,10 +80,10 @@
                                                         class="badge bagde-success">File Lampiran</span></a>
                                             </td>
                                             <td>
-                                                <a href="{{ route('laporan_keuangan.ubah_pemasukan.edit', ['id' => $q->id]) }}"
+                                                <a href="{{ route('laporan_keuangan.ubah_pengeluaran.edit', ['id' => $q->id]) }}"
                                                     class="btn btn-warning btn-sm">Ubah</a>
                                                 <form
-                                                    action="{{ route('laporan_keuangan.hapus_pemasukan.delete', $q->id) }}"
+                                                    action="{{ route('laporan_keuangan.hapus_pengeluaran.delete', $q->id) }}"
                                                     method="POST" class="d-inline form-delete">
                                                     @csrf
                                                     @method('DELETE')
@@ -110,8 +111,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.querySelectorAll('.btn-delete').forEach(function(button) {
-            button.addEventListener('click', function() {
-                const userId = this.getAttribute('data-id');
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                const form = this.closest('form');
                 Swal.fire({
                     title: 'Yakin ingin menghapus?',
                     text: "Data yang dihapus tidak bisa dikembalikan!",
@@ -122,8 +124,6 @@
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        const form = document.getElementById('formDeleteUser');
-                        form.setAttribute('action', `/delete_category/${userId}`);
                         form.submit();
                     }
                 });
