@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('transaksi_detail', function (Blueprint $table) {
             $table->id()->comment('primary key');
-            $table->unsignedInteger('transaksi_id')->index()->nullable();
-            $table->unsignedInteger('barang_id')->index()->nullable();
+            $table->unsignedBigInteger('transaksi_id')->index()->nullable();
+            $table->unsignedBigInteger('barang_id')->index()->nullable();
             $table->integer('qty')->nullable();
             $table->double('harga_satuan', 12,2)->nullable();
             $table->double('subtotal', 12,2)->nullable();
