@@ -45,7 +45,7 @@ class MasterProdukController extends Controller
             'kategori_id'   => 'required',
             'harga_barang'  => 'required',
             'stok'          => 'required',
-            'gambar_produk' => $id ? 'nullable | max:2048' : 'required | max:2048' 
+            'gambar_produk' => $id ? 'nullable | max:2048' : 'required | max:2048'
         ];
 
         // dd($mandatory);
@@ -75,12 +75,12 @@ class MasterProdukController extends Controller
             $data = new MasterProdukModel;
             // $data->created_by = auth()->user()->id;
         }
-
+        $harga_barang = str_replace('.','',$request->harga_barang);
         // ini adalah inputan user, berkaitan dengan form di tampilan
         $data->kode_barang = $request->input('kode_barang');
         $data->nama_barang = $request->input('nama_barang');
         $data->kategori_id = $request->input('kategori_id');
-        $data->harga_barang = $request->input('harga_barang');
+        $data->harga_barang = $harga_barang;
         $data->stok = $request->input('stok');
         // $data->gambar_produk = $request->input('gambar_produk');
         if ($request->hasFile('gambar_produk')) {

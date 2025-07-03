@@ -35,7 +35,7 @@
                                                 <span id="tanggal2" class="input-group-text"><i
                                                         class="icon-base ti tabler-calendar"></i></span>
                                                 <input type="date" id="tanggal" name="tanggal" class="form-control"
-                                                    required value="" autofocus />
+                                                    required value="{{ old('tanggal', $data->tanggal ?? '') }}" autofocus />
                                             </div>
                                         </div>
                                     </div>
@@ -63,7 +63,7 @@
                                                         class="icon-base ti tabler-cash-register"></i></span>
                                                 <input type="text" id="jumlah" name="jumlah" class="form-control"
                                                     required placeholder="Rp"
-                                                    value=""
+                                                     value="{{ number_format(old('jumlah', $data->jumlah, 0, ',', '.' ?? '')) }}"
                                                     aria-describedby="jumlah" />
                                             </div>
                                         </div>
@@ -80,14 +80,14 @@
                                                     aria-describedby="file_lampiran" />
                                             </div>
 
-                                            {{-- @if (isset($data) && $data->file_lampiran) --}}
-                                                {{-- <div class="mt-2">
+                                            @if (isset($data) && $data->file_lampiran)
+                                                <div class="mt-2">
                                                     <a href="{{ asset('storage/' . $data->file_lampiran) }}" target="_blank"
                                                         class="btn btn-info btn-sm">
                                                         <i class="icon-base ti tabler-download"></i> Download Lampiran Lama
                                                     </a>
-                                                </div> --}}
-                                            {{-- @endif --}}
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
 
