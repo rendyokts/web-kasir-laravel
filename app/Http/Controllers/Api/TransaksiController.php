@@ -7,6 +7,7 @@ use App\Models\TransaksiDetailModel;
 use App\Models\TransaksiModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class TransaksiController extends Controller
 {
@@ -53,7 +54,7 @@ class TransaksiController extends Controller
             ], 201);
         } catch (\Exception $e) {
             DB::rollBack();
-            \Log::error('Gagal simpan transaksi', ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
+            Log::error('Gagal simpan transaksi', ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
             return response()->json([
                 'message' => 'Gagal menyimpan transaksi',
                 'error' => $e->getMessage()

@@ -4,7 +4,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Models\TransaksiDetailModel;
 use Illuminate\Support\Facades\Route;
 
-// Bikin View nya dulu di Resources View
+// Bikin Tampilan nya dulu di Resources View
 // Bikin Controller di app/http/controllers pake `php artisan make:controller NamaFolder\NamaFileController` Nama Folder Awal Kapitar, Nama File AwalKapital + Controller
 // Bikin Routes nya di web.php
 // Bikin Models di app\models pake `php artisan make:model NamaFolder\NamaFile`
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 //Users
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 
