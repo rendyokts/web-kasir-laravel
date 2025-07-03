@@ -18,6 +18,8 @@ class LaporanKeuanganController extends Controller
         return view('laporan_keuangan.index');
     }
 
+    //pemasukan
+
     public function uang_masuk()
     {
 
@@ -25,16 +27,10 @@ class LaporanKeuanganController extends Controller
         return view('laporan_keuangan.uang_masuk.index', compact('query'));
     }
 
-    public function uang_keluar()
-    {
-        $query = LaporanKeuanganModel::select('*')->where('jenis', 'keluar')->where('status', 1)->get();
-        return view('laporan_keuangan.uang_keluar.index', compact('query'));
-    }
-
     public function index_uang_masuk()
     {
 
-        $data = LaporanKeuanganModel::where('status', 2)->get();
+        $data = new LaporanKeuanganModel;
         return view('laporan_keuangan.uang_masuk.form', compact('data'));
     }
 
@@ -63,7 +59,7 @@ class LaporanKeuanganController extends Controller
             $data = new LaporanKeuanganModel();
         }
 
-        $jumlah = str_replace('.', '', $request->jumlah);
+        $jumlah = str_replace([',','.'], '', $request->jumlah);
 
         $data->tanggal = $request->input('tanggal');
         $data->jenis = 'masuk';
@@ -98,17 +94,18 @@ class LaporanKeuanganController extends Controller
         return redirect()->back()->with('success', 'Data uang masuk berhasil dihapus');
     }
 
-    public function tambah_pengeluaran()
-    {
-        $data = new LaporanKeuanganModel;
+    //pengeluaran
 
-        return view('laporan_keuangan.uang_keluar.form',compact('data'));
-        
+    public function uang_keluar()
+    {
+        $query = LaporanKeuanganModel::select('*')->where('jenis', 'keluar')->where('status', 1)->get();
+        return view('laporan_keuangan.uang_keluar.index', compact('query'));
     }
+
     public function index_uang_keluar()
     {
 
-        $data = LaporanKeuanganModel::where('status', 2)->get();
+        $data = new LaporanKeuanganModel;
         // dd ($data);
         return view('laporan_keuangan.uang_keluar.form', compact('data'));
     }
@@ -138,7 +135,7 @@ class LaporanKeuanganController extends Controller
             $data = new LaporanKeuanganModel();
         }
 
-        $jumlah = str_replace('.', '', $request->jumlah);
+        $jumlah = str_replace([',','.'], '', $request->jumlah);
 
         $data->tanggal = $request->input('tanggal');
         $data->jenis = 'keluar';
@@ -158,7 +155,6 @@ class LaporanKeuanganController extends Controller
 
         public function delete_uang_keluar($id)
     {
-
         // function ini tidak menghapus tapi mengubah statusnya menjadi 2 yang mana tidak ditampilkan ke view user, data di table view user hilang, tapi di database tetap ada
         $data = LaporanKeuanganModel::findOrFail($id);
         $data->status = 2;
@@ -172,6 +168,6 @@ class LaporanKeuanganController extends Controller
         $data = LaporanKeuanganModel::find($id);
         return view('laporan_keuangan.uang_keluar.form', compact('data'));
     }
-    
+
 
 }
