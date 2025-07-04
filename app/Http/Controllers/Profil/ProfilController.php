@@ -31,10 +31,9 @@ class ProfilController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,'.$user->id,
             'telepon' => 'nullable|string|max:20',
-            'alamat' => 'nullable|string'
         ]);
 
-        $user->update($request->only(['name', 'email', 'telepon', 'alamat']));
+        $user->update($request->only(['name', 'email', 'telepon']));
         
         return redirect()->route('profil.index')->with('success', 'Profil berhasil diperbarui');
     }
