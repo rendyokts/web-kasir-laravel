@@ -11,14 +11,14 @@ class ProfilController extends Controller
 {
     public function index()
     {
-        return view('profil.index', [
+        return view('profil.indexProfile', [
             'user' => auth()->user()
         ]);
     }
 
     public function edit()
     {
-        return view('profil.edit', [
+        return view('profil.editProfile', [
             'user' => auth()->user()
         ]);
     }
@@ -41,7 +41,7 @@ class ProfilController extends Controller
 
     public function showChangePasswordForm()
     {
-        return view('profil.ganti-password');
+        return view('profil.passwordProfile');
     }
 
     public function changePassword(Request $request)
