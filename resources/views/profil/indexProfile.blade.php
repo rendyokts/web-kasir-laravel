@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('content')
 <div class="container py-4">
@@ -72,7 +72,7 @@
                     
                     <div class="row mb-3">
                         <div class="col-md-4 fw-bold">Nomor Telepon:</div>
-                        <div class="col-md-8">{{ auth()->user()->telepon ?? '<span class="text-muted">Belum diisi</span>' }}</div>
+                        <div class="col-md-8">{{ auth()->user()->telepon ?? 'Belum diisi'}}</div>
                     </div>
                     
                     <div class="row mb-3">

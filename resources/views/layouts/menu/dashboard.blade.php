@@ -30,7 +30,7 @@
         <div>Laporan Keuangan</div>
     </a>
 <li class="menu-item">
-    <a href="#" class="menu-link">
+    <a href="{{route('profil.index')}}" class="menu-link">
         <i class="menu-icon icon-base ti tabler-user"></i>
         <div>Profil</div>
     </a>
