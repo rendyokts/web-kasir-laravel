@@ -20,7 +20,7 @@
 
                         <!-- Card Header -->
                         <div class="card-header d-flex justify-content-between align-items-center border-bottom">
-                            <h5 class="card-title m-0">Pengeluaran dan Pemasukan    </h5>
+                            <h5 class="card-title m-0">Pengeluaran dan Pemasukan </h5>
                             {{-- Ubah bagian atas untuk header --}}
                             <div class="d-flex gap-2">
                                 <a href="{{ route('laporan_keuangan.uang_masuk') }}" class="btn btn-primary">
@@ -56,8 +56,11 @@
                                 <thead>
                                     <tr>
                                         <th width="10">No</th>
-                                        <th>Kode Kategori</th>
-                                        <th>Nama Kategori</th>
+                                        <th>Tanggal</th>
+                                        <th>Jenis Keuangan</th>
+                                        <th>Keterangan</th>
+                                        <th>Jumlah</th>
+                                        <th>Lampiran</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -65,19 +68,27 @@
                                 <tbody>
                                     {{-- CLIENT SIDE --}}
                                     {{-- Looping Foreach --}}
-                                    {{-- @foreach ($query as $q)
+                                    @foreach ($query as $q)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $q->kode_kategori }}</td>
-                                            <td>{{ $q->nama }}</td>
-                                            <td>
-                                                <a href="{{ route('master_category.edit', ['id' => $q->id]) }}"
-                                                    class="btn btn-warning btn-sm">Ubah</a>
-                                                <a href="javascript:void(0);" data-id="{{ $q->id }}"
-                                                    class="btn btn-danger btn-sm btn-delete">Hapus</a>
-                                            </td>
+                                            <td>{{ $q->tanggal }}</td>
+                                            <td>{{ $q->jenis }}</td>
+                                            <td>{{ $q->keterangan }}</td>
+                                            <td>Rp {{ number_format($q->jumlah, 0, ',', '.') }}
+                                                </td>
+                                                <td>
+                                                    <a href="{{ asset('storage/' . $q->file_lampiran) }}"
+                                                        target="_blank"><i class="icon-base ti tabler-file"></i> <span
+                                                            class="badge bagde-success">File Lampiran</span></a>
+                                                </td>
+                                                <td>
+                                                    <a href="{{ route('master_category.edit', ['id' => $q->id]) }}"
+                                                        class="btn btn-warning btn-sm">Ubah</a>
+                                                    <a href="javascript:void(0);" data-id="{{ $q->id }}"
+                                                        class="btn btn-danger btn-sm btn-delete">Hapus</a>
+                                                </td>
                                         </tr>
-                                    @endforeach --}}
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

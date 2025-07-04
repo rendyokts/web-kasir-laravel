@@ -15,7 +15,8 @@ class LaporanKeuanganController extends Controller
 {
     public function index()
     {
-        return view('laporan_keuangan.index');
+        $query = LaporanKeuanganModel::where('status', 1)->get();
+        return view('laporan_keuangan.index', compact('query'));
     }
 
     //pemasukan
