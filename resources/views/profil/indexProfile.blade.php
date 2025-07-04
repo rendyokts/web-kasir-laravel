@@ -72,12 +72,7 @@
                     
                     <div class="row mb-3">
                         <div class="col-md-4 fw-bold">Nomor Telepon:</div>
-                        <div class="col-md-8">{{ auth()->user()->telepon ?? 'Belum diisi'}}</div>
-                    </div>
-                    
-                    <div class="row mb-3">
-                        <div class="col-md-4 fw-bold">Alamat:</div>
-                        <div class="col-md-8">{{ auth()->user()->alamat ?? '<span class="text-muted">Belum diisi</span>' }}</div>
+                        <div class="col-md-8">{{ auth()->user()->telp ?? '-'}}</div>
                     </div>
                     
                     <div class="row mb-3">
