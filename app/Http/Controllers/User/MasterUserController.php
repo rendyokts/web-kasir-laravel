@@ -73,7 +73,6 @@ class MasterUserController extends Controller
         $data->email = $request->input('email');
         $data->role = $request->input('role');
         $data->status = $request->input('status');
-        $data->password = '$2y$10$9RXeWXWAt1uZ7zO8DGn1d.MBuWB0iNkRDYXjmmv1qwTMvQPZ8gJFi';
         $data->save(); //disimpan ke database dengan nama table users yang ada di MasterUserModel --> models nya
 
         return redirect()->route('master_user.index')->with('toast_success', 'Data user berhasil disimpan')->with('user_saved', $data);

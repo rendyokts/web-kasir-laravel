@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Transaksi\TransaksiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\MasterUserController;
 
@@ -9,4 +10,9 @@ Route::prefix('master_user')->group(function () {
     Route::post('/save_user', [MasterUserController::class, 'saveUser'])->name('master_user.save');
     Route::get('/edit/{id}', [MasterUserController::class, 'editUser'])->name('master_user.edit');
     Route::delete('/delete/{id}', [MasterUserController::class, 'deleteUser'])->name('master_user.delete');
+});
+
+Route::prefix('transaksi')->group(function () {
+    Route::get('/list', [TransaksiController::class, 'list_transaksi'])->name('transaksi.list');
+    Route::get('/detail/{id}', [TransaksiController::class, 'detail_transaksi'])->name('transaksi.detail');
 });

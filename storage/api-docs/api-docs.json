@@ -1,0 +1,558 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Dokumentasi API WebKasir",
+        "description": "Dokumentasi API untuk aplikasi WebKasir",
+        "contact": {
+            "email": "support@webkasir.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000",
+            "description": "API Server"
+        }
+    ],
+    "paths": {
+        "/api/mobile/loginApi": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login user",
+                "description": "Login menggunakan email/username dan password",
+                "operationId": "e6a51a7a3ad5c8d160ac37e309846c66",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "login",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "login": {
+                                        "type": "string",
+                                        "example": "johndoe@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "rahasia123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login berhasil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Login berhasil"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "token": {
+                                                    "type": "string",
+                                                    "example": "2|abcdef..."
+                                                },
+                                                "token_type": {
+                                                    "type": "string",
+                                                    "example": "Bearer"
+                                                },
+                                                "user": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "John Doe"
+                                                        },
+                                                        "email": {
+                                                            "type": "string",
+                                                            "example": "johndoe@example.com"
+                                                        },
+                                                        "username": {
+                                                            "type": "string",
+                                                            "example": "johndoe"
+                                                        },
+                                                        "telp": {
+                                                            "type": "string",
+                                                            "example": "08123456789"
+                                                        },
+                                                        "role": {
+                                                            "type": "string",
+                                                            "example": "admin"
+                                                        },
+                                                        "status": {
+                                                            "type": "string",
+                                                            "example": "Aktif"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Login gagal / akun tidak aktif"
+                    },
+                    "422": {
+                        "description": "Validasi input gagal"
+                    },
+                    "500": {
+                        "description": "Terjadi kesalahan server"
+                    }
+                }
+            }
+        },
+        "/api/mobile/list_produk": {
+            "get": {
+                "tags": [
+                    "Produk"
+                ],
+                "summary": "Ambil daftar produk yang aktif",
+                "description": "Endpoint ini digunakan untuk mengambil semua produk yang statusnya aktif.",
+                "operationId": "da4de773817440fef797769fb434ae62",
+                "responses": {
+                    "200": {
+                        "description": "Data produk berhasil diambil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data Barang Berhasil Diambiil"
+                                        },
+                                        "count": {
+                                            "type": "integer",
+                                            "example": 3
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "kode_barang": {
+                                                        "type": "string",
+                                                        "example": "BRG001"
+                                                    },
+                                                    "nama_barang": {
+                                                        "type": "string",
+                                                        "example": "Kopi Hitam"
+                                                    },
+                                                    "harga_barang": {
+                                                        "type": "number",
+                                                        "format": "float",
+                                                        "example": 10000
+                                                    },
+                                                    "gambar_produk": {
+                                                        "type": "string",
+                                                        "format": "url",
+                                                        "example": "http://webkasir.milyascube.site/storage/gambar.jpg"
+                                                    },
+                                                    "kategori_id": {
+                                                        "type": "integer",
+                                                        "example": 2
+                                                    },
+                                                    "stok": {
+                                                        "type": "integer",
+                                                        "example": 10
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "Aktif"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2025-07-06T12:00:00.000000Z"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2025-07-06T12:30:00.000000Z"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Data barang tidak ditemukan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data barang tidak ditemukan"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/mobile/list_kategori": {
+            "get": {
+                "tags": [
+                    "Kategori"
+                ],
+                "summary": "Ambil daftar kategori produk",
+                "description": "Endpoint ini digunakan untuk mengambil seluruh data kategori yang tersedia.",
+                "operationId": "17a3ed76daf623f28c65084283ae3d35",
+                "responses": {
+                    "200": {
+                        "description": "Data kategori berhasil diambil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data Kategori berhasil diambil"
+                                        },
+                                        "count": {
+                                            "type": "integer",
+                                            "example": 3
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "kode_kategori": {
+                                                        "type": "string",
+                                                        "example": "KTG001"
+                                                    },
+                                                    "nama": {
+                                                        "type": "string",
+                                                        "example": "Minuman"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Data kategori tidak ada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data kategori tidak ada"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/mobile/transaksi": {
+            "post": {
+                "tags": [
+                    "Transaksi"
+                ],
+                "summary": "Simpan transaksi dan update stok barang",
+                "description": "Menyimpan transaksi penjualan sekaligus mengurangi stok barang berdasarkan detail transaksi.",
+                "operationId": "e6858a5ae7669393b371fda3107c9649",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "tanggal",
+                                    "total",
+                                    "user_id",
+                                    "pembayaran",
+                                    "detail"
+                                ],
+                                "properties": {
+                                    "tanggal": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-07-06"
+                                    },
+                                    "total": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 50000
+                                    },
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "pembayaran": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 50000
+                                    },
+                                    "detail": {
+                                        "type": "array",
+                                        "items": {
+                                            "required": [
+                                                "barang_id",
+                                                "qty",
+                                                "harga_satuan",
+                                                "subtotal"
+                                            ],
+                                            "properties": {
+                                                "barang_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "qty": {
+                                                    "type": "integer",
+                                                    "example": 2
+                                                },
+                                                "harga_satuan": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 25000
+                                                },
+                                                "subtotal": {
+                                                    "type": "number",
+                                                    "format": "float",
+                                                    "example": 50000
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "minItems": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Transaksi berhasil disimpan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Transaksi berhasil disimpan dan stok berhasil diperbarui"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 12
+                                                },
+                                                "kode_transaksi": {
+                                                    "type": "string",
+                                                    "example": "TRX-20250706-00001"
+                                                },
+                                                "tanggal": {
+                                                    "type": "string",
+                                                    "format": "date",
+                                                    "example": "2025-07-06"
+                                                },
+                                                "total": {
+                                                    "type": "number",
+                                                    "example": 50000
+                                                },
+                                                "user_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "pembayaran": {
+                                                    "type": "number",
+                                                    "example": 50000
+                                                },
+                                                "details": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "barang_id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "qty": {
+                                                                "type": "integer",
+                                                                "example": 2
+                                                            },
+                                                            "harga_satuan": {
+                                                                "type": "number",
+                                                                "example": 25000
+                                                            },
+                                                            "subtotal": {
+                                                                "type": "number",
+                                                                "example": 50000
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validasi gagal (input tidak lengkap/benar)"
+                    },
+                    "500": {
+                        "description": "Gagal menyimpan transaksi",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Gagal menyimpan transaksi"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Stok barang Kopi Hitam tidak mencukupi. Stok tersedia: 1, diminta: 3"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/mobile/transaksi/harian": {
+            "get": {
+                "tags": [
+                    "Statistik Transaksi"
+                ],
+                "summary": "Hitung total transaksi hari ini",
+                "description": "Menghitung jumlah transaksi dan total nilai transaksi yang terjadi pada hari ini.",
+                "operationId": "313c5d69b63f81d66f4b30ba53581fb8",
+                "responses": {
+                    "200": {
+                        "description": "Berhasil menghitung transaksi hari ini",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Data transaksi hari ini berhasil diambil"
+                                        },
+                                        "jumlah_transaksi": {
+                                            "type": "integer",
+                                            "example": 5
+                                        },
+                                        "total_transaksi": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "example": 250000
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Auth"
+        },
+        {
+            "name": "Produk",
+            "description": "Produk"
+        },
+        {
+            "name": "Kategori",
+            "description": "Kategori"
+        },
+        {
+            "name": "Transaksi",
+            "description": "Transaksi"
+        },
+        {
+            "name": "Statistik Transaksi",
+            "description": "Statistik Transaksi"
+        }
+    ]
+}

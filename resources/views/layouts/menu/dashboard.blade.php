@@ -1,7 +1,7 @@
 <li class="menu-item">
-    <a href="#" class="menu-link">
+    <a href="{{ route('transaksi.list') }}" class="menu-link">
         <i class="menu-icon icon-base ti tabler-building-store"></i>
-        <div>POS</div>
+        <div>Data Transaksi</div>
     </a>
 </li>
 <li class="menu-item">
@@ -30,7 +30,7 @@
         <div>Laporan Keuangan</div>
     </a>
 <li class="menu-item">
-    <a href="#" class="menu-link">
+    <a href="{{route('profil.index', ['id' => auth()->user()->id])}}" class="menu-link">
         <i class="menu-icon icon-base ti tabler-user"></i>
         <div>Profil</div>
     </a>

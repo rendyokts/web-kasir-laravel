@@ -34,7 +34,7 @@ class MasterCategoryController extends Controller
     {
         // dd($request->all());
         $mandatory = [
-            'kode_kategori' => 'required | unique:kategori', // Required artinya diisi
+            'kode_kategori' => 'required',
             'nama' => 'required'
         ];
 

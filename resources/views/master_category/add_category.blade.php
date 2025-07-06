@@ -23,9 +23,7 @@
                         <div class="card-body">
                             <form method="post" action="{{ route('master_category.save') }}" id="formUser">
                                 @csrf
-                                {{-- Cross Site Resource Forgery --}}
                                 <input type="hidden" name="id" value="{{ $data->id ?? '' }}">
-                                {{-- Input hidden jangan lupa ditambahkan untuk melakukan pengecekan id apabila sudah ada maka bisa dilakukan edit, jika kosong akan dilakukan tambah user --}}
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="mb-6">
@@ -34,8 +32,9 @@
                                             <div class="input-group input-group-merge">
                                                 <span id="username2" class="input-group-text"><i
                                                         class="icon-base ti tabler-category"></i></span>
-                                                <input type="text" id="kode_kategori" name="kode_kategori" class="form-control"
-                                                    placeholder="Kode Kategori" aria-label="Kode Kategori" required
+                                                <input type="text" id="kode_kategori" name="kode_kategori"
+                                                    class="form-control" placeholder="Kode Kategori"
+                                                    aria-label="Kode Kategori" required
                                                     value="{{ old('kode_kategori', $data->kode_kategori ?? '') }}"
                                                     aria-describedby="username2" />
                                             </div>
@@ -49,8 +48,9 @@
                                                 <span id="name2" class="input-group-text"><i
                                                         class="icon-base ti tabler-pencil"></i></span>
                                                 <input type="text" class="form-control" name="nama" id="nama"
-                                                    placeholder="Nama Kategori" aria-label="Nama Kategori" autofocus required
-                                                    aria-describedby="name2" value="{{ old('nama', $data->nama ?? '') }}" />
+                                                    placeholder="Nama Kategori" aria-label="Nama Kategori" autofocus
+                                                    required aria-describedby="name2"
+                                                    value="{{ old('nama', $data->nama ?? '') }}" />
                                             </div>
                                         </div>
                                     </div>
