@@ -21,7 +21,6 @@ class ApiLoginController extends Controller
 
         try {
             $login_type = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-
             $user = MasterUserModel::where($login_type, $request->login)
                 ->where('status', 1)
                 ->first();
@@ -33,23 +32,22 @@ class ApiLoginController extends Controller
                     'success' => true,
                     'message' => 'Login berhasil',
                     'data' => [
-                        'id' => $user->id,
-                        'name' => $user->name,
-                        'email' => $user->email,
-                        'username' => $user->username ?? null,
-                        'telp' => $user->telp ?? null,
-                        'role' => $user->role,
-                        'status' => $user->status == 1 ? 'Aktif' : 'Tidak Aktif'
-                    ],
-                    'token' => $token,
-                    'token_type' => 'Bearer'
+                        'token' => $token,
+                        'token_type' => 'Bearer',
+                        'user' => [
+                            'id' => $user->id,
+                            'name' => $user->name,
+                            'email' => $user->email,
+                            'username' => $user->username ?? null,
+                            'telp' => $user->telp ?? null,
+                            'role' => $user->role,
+                            'status' => $user->status == 1 ? 'Aktif' : 'Tidak Aktif'
+                        ]
+                    ]
                 ], 200);
             } else {
-                // Cek apakah user ada tapi tidak aktif
                 $userExists = MasterUserModel::where($login_type, $request->login)->first();
-
                 if ($userExists && Hash::check($request->password, $userExists->password)) {
-                    // User ada tapi tidak aktif
                     return response()->json([
                         'success' => false,
                         'message' => 'Akun anda sudah tidak aktif. Silahkan hubungi admin',
@@ -58,7 +56,6 @@ class ApiLoginController extends Controller
                         ]
                     ], 401);
                 } else {
-                    // Kredensial salah
                     return response()->json([
                         'success' => false,
                         'message' => 'Login gagal, cek lagi email/username dan passwordnya',
