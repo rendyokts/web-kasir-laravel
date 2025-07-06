@@ -9,9 +9,83 @@ use App\Models\MasterProdukModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
+
 
 class TransaksiController extends Controller
 {
+
+    /**
+     * @OA\Post(
+     *     path="/api/mobile/transaksi",
+     *     tags={"Transaksi"},
+     *     summary="Simpan transaksi dan update stok barang",
+     *     description="Menyimpan transaksi penjualan sekaligus mengurangi stok barang berdasarkan detail transaksi.",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"tanggal", "total", "user_id", "pembayaran", "detail"},
+     *             @OA\Property(property="tanggal", type="string", format="date", example="2025-07-06"),
+     *             @OA\Property(property="total", type="number", format="float", example=50000),
+     *             @OA\Property(property="user_id", type="integer", example=1),
+     *             @OA\Property(property="pembayaran", type="number", format="float", example=50000),
+     *             @OA\Property(
+     *                 property="detail",
+     *                 type="array",
+     *                 minItems=1,
+     *                 @OA\Items(
+     *                     type="object",
+     *                     required={"barang_id", "qty", "harga_satuan", "subtotal"},
+     *                     @OA\Property(property="barang_id", type="integer", example=1),
+     *                     @OA\Property(property="qty", type="integer", example=2),
+     *                     @OA\Property(property="harga_satuan", type="number", format="float", example=25000),
+     *                     @OA\Property(property="subtotal", type="number", format="float", example=50000)
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Transaksi berhasil disimpan",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Transaksi berhasil disimpan dan stok berhasil diperbarui"),
+     *             @OA\Property(
+     *                 property="data",
+     *                 type="object",
+     *                 @OA\Property(property="id", type="integer", example=12),
+     *                 @OA\Property(property="kode_transaksi", type="string", example="TRX-20250706-00001"),
+     *                 @OA\Property(property="tanggal", type="string", format="date", example="2025-07-06"),
+     *                 @OA\Property(property="total", type="number", example=50000),
+     *                 @OA\Property(property="user_id", type="integer", example=1),
+     *                 @OA\Property(property="pembayaran", type="number", example=50000),
+     *                 @OA\Property(
+     *                     property="details",
+     *                     type="array",
+     *                     @OA\Items(
+     *                         type="object",
+     *                         @OA\Property(property="barang_id", type="integer", example=1),
+     *                         @OA\Property(property="qty", type="integer", example=2),
+     *                         @OA\Property(property="harga_satuan", type="number", example=25000),
+     *                         @OA\Property(property="subtotal", type="number", example=50000)
+     *                     )
+     *                 )
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Validasi gagal (input tidak lengkap/benar)"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Gagal menyimpan transaksi",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Gagal menyimpan transaksi"),
+     *             @OA\Property(property="error", type="string", example="Stok barang Kopi Hitam tidak mencukupi. Stok tersedia: 1, diminta: 3")
+     *         )
+     *     )
+     * )
+     */
     public function store(Request $request)
     {
         $request->validate([
@@ -144,5 +218,40 @@ class TransaksiController extends Controller
         }
 
         return $prefix . str_pad($number, 5, '0', STR_PAD_LEFT);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/mobile/transaksi/harian",
+     *     tags={"Statistik Transaksi"},
+     *     summary="Hitung total transaksi hari ini",
+     *     description="Menghitung jumlah transaksi dan total nilai transaksi yang terjadi pada hari ini.",
+     *     security={{"sanctum": {}}},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Berhasil menghitung transaksi hari ini",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="success", type="boolean", example=true),
+     *             @OA\Property(property="message", type="string", example="Data transaksi hari ini berhasil diambil"),
+     *             @OA\Property(property="jumlah_transaksi", type="integer", example=5),
+     *             @OA\Property(property="total_transaksi", type="number", format="float", example=250000)
+     *         )
+     *     )
+     * )
+     */
+    public function totalTransaksiHariIni()
+    {
+        $today = Carbon::today();
+
+        $jumlahTransaksi = TransaksiModel::whereDate('tanggal', $today)->count();
+
+        $totalTransaksi = TransaksiModel::whereDate('tanggal', $today)->sum('total');
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data transaksi hari ini berhasil diambil',
+            'jumlah_transaksi' => $jumlahTransaksi,
+            'total_transaksi' => $totalTransaksi
+        ]);
     }
 }
