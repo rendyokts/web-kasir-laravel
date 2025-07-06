@@ -12,13 +12,24 @@
             });
         </script>
     @endif
+    @if (session('info'))
+        <script>
+            Swal.fire({
+                title: 'Berhasil!',
+                text: '{{ session('info') }}',
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
 
     <div class="authentication-wrapper authentication-cover">
         <!-- Logo -->
         <a href="{{ route('login') }}" class="app-brand auth-cover-brand">
             <span class="app-brand-logo demo">
                 <span class="text-primary">
-                    <img src="{{ asset('assets/img/restaurant-56.png') }}" alt="logo" style="width: 60px; height:auto;">
+                    <img src="{{ asset('assets/img/frame2.png') }}" alt="logo" class="rounded-5"
+                        style="width: 60px; height:auto;">
                 </span>
             </span>
             <span class="app-brand-text demo text-heading fw-bold">WARKOPOS</span>
@@ -68,7 +79,7 @@
                         <div class="my-8">
                             <div class="d-flex justify-content-between">
                                 <a href="{{ route('password.request') }}">
-                                    <p class="mb-0">Lupa Password?</p>
+                                    <p class="mb-0 text-primary fw-medium">Lupa Password?</p>
                                 </a>
                             </div>
                         </div>
@@ -78,9 +89,21 @@
                     <p class="text-center">
                         <span>Belum punya akun?</span>
                         <a href="{{ route('register') }}">
-                            <span>Gass bikin dulu</span>
+                            <span class="text-primary fw-medium ">Gass bikin dulu</span>
                         </a>
                     </p>
+                    <div class="divider my-6">
+                        <div class="divider-text">Atau Masuk dengan</div>
+                    </div>
+
+                    <div class="d-grid gap-2 col-12 mx-auto">
+                        <a href="{{ route('google.auth') }}"
+                            class="btn btn-white w-full flex items-center justify-center border-secondary py-2 px-4 rounded hover:bg-gray-600">
+                            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google"
+                                class="h-5 mr-2" style="height: 20px;">
+                            <span class="text-gray-700">Google</span>
+                        </a>
+                    </div>
                 </div>
             </div>
             <!-- /Login -->
@@ -90,12 +113,12 @@
     <!-- Core JS -->
     @extends('layouts.scripts')
     @section('page-js')
-    <!-- Vendors JS -->
-    <script src="{{ asset('portos/assets/vendor/libs/@form-validation/popular.js') }}"></script>
-    <script src="{{ asset('portos/assets/vendor/libs/@form-validation/bootstrap5.js') }}"></script>
-    <script src="{{ asset('portos/assets/vendor/libs/@form-validation/auto-focus.js') }}"></script>
-    <!-- Page JS -->
-    <script src="{{ asset('portos/assets/js/pages-auth.js') }}"></script>
+        <!-- Vendors JS -->
+        <script src="{{ asset('portos/assets/vendor/libs/@form-validation/popular.js') }}"></script>
+        <script src="{{ asset('portos/assets/vendor/libs/@form-validation/bootstrap5.js') }}"></script>
+        <script src="{{ asset('portos/assets/vendor/libs/@form-validation/auto-focus.js') }}"></script>
+        <!-- Page JS -->
+        <script src="{{ asset('portos/assets/js/pages-auth.js') }}"></script>
     @endsection
 </body>
 

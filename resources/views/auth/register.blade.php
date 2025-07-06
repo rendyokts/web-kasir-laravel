@@ -7,7 +7,7 @@
         <a href="{{ route('login') }}" class="app-brand auth-cover-brand d-none d-xl-flex">
             <span class="app-brand-logo demo">
                 <span class="text-primary">
-                    <img src="{{ asset('assets/img/restaurant-56.png') }}" alt="logo" style="width: 60px; height:auto;">
+                    <img src="{{ asset('assets/img/frame2.png') }}" alt="logo" class="rounded-5" style="width: 60px; height:auto;">
                 </span>
             </span>
             <span class="app-brand-text demo text-heading fw-bold">WARKOPOS</span>
@@ -102,7 +102,7 @@
                     <p class="text-center">
                         <span>Sudah punya akun?</span>
                         <a href="{{ route('login') }}">
-                            <span>Ya tinggal login dong</span>
+                            <span class="text-primary fw-medium">Ya tinggal login dong</span>
                         </a>
                     </p>
 
