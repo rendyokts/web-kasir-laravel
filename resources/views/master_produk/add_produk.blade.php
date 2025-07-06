@@ -85,7 +85,7 @@
                                                 <input type="text" inputmode="numeric" id="harga_barang" name="harga_barang"
                                                     class="form-control phone-mask" placeholder="1000" aria-label="1000"
                                                     aria-describedby="harga_barang2" required
-                                                    value="{{ old('telp', $data->harga_barang ?? '') }}" />
+                                                    value="{{ number_format(old('harga_barang', $data->harga_barang, 0, ',', '.' ?? '')) }}" />
                                             </div>
                                         </div>
                                     </div>
