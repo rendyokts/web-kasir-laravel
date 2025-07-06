@@ -66,7 +66,7 @@
                         <div class="dropdown-divider my-1 mx-n2"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="{{route('profil.index')}}">
+                        <a class="dropdown-item" href="{{route('profil.index', ['id' => Auth()->user()->id])}}">
                             <i class="icon-base ti tabler-user me-3 icon-md"></i>
                             <span class="align-middle">My Profile</span>
                         </a>
