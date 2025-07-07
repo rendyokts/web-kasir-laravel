@@ -86,38 +86,105 @@ class TransaksiController extends Controller
      *     )
      * )
      */
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'tanggal' => 'required|date',
+    //         'total' => 'required|numeric',
+    //         'user_id' => 'required|integer',
+    //         'pembayaran' => 'required|numeric|max:' . $request->total,
+    //         'detail' => 'required|array|min:1',
+    //         'detail.*.barang_id' => 'required|integer',
+    //         'detail.*.qty' => 'required|integer|min:1',
+    //         'detail.*.harga_satuan' => 'required|numeric',
+    //         'detail.*.subtotal' => 'required|numeric',
+    //     ]);
+
+    //     DB::beginTransaction();
+    //     try {
+    //         // Validasi pembayaran tidak boleh melebihi total
+    //         $this->validatePayment($request->total, $request->pembayaran);
+
+    //         // Validasi stok sebelum transaksi
+    //         $this->validateStock($request->detail);
+
+    //         $transaksi = TransaksiModel::create([
+    //             'kode_transaksi' => $this->generateKodeTransaksi(),
+    //             'tanggal' => $request->tanggal,
+    //             'total' => $request->total,
+    //             'user_id' => $request->user_id,
+    //             'pembayaran' => $request->pembayaran
+    //         ]);
+
+    //         // Simpan setiap item detail dan kurangi stok
+    //         foreach ($request->detail as $item) {
+    //             // Simpan detail transaksi
+    //             TransaksiDetailModel::create([
+    //                 'transaksi_id' => $transaksi->id,
+    //                 'barang_id' => $item['barang_id'],
+    //                 'qty' => $item['qty'],
+    //                 'harga_satuan' => $item['harga_satuan'],
+    //                 'subtotal' => $item['subtotal'],
+    //             ]);
+
+    //             // Kurangi stok barang
+    //             $this->updateStock($item['barang_id'], $item['qty']);
+    //         }
+
+    //         DB::commit();
+    //         return response()->json([
+    //             'message' => 'Transaksi berhasil disimpan dan stok berhasil diperbarui',
+    //             'data' => $transaksi->load('details')
+    //         ], 201);
+    //     } catch (\Exception $e) {
+    //         DB::rollBack();
+    //         Log::error('Gagal simpan transaksi', [
+    //             'error' => $e->getMessage(),
+    //             'trace' => $e->getTraceAsString(),
+    //             'request_data' => $request->all()
+    //         ]);
+
+    //         return response()->json([
+    //             'message' => 'Gagal menyimpan transaksi',
+    //             'error' => $e->getMessage()
+    //         ], 500);
+    //     }
+    // }
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'tanggal' => 'required|date',
-            'total' => 'required|numeric',
+            'total' => 'required|numeric|min:0',
             'user_id' => 'required|integer',
-            'pembayaran' => 'required|numeric|max:' . $request->total,
+            'pembayaran' => 'required|numeric|min:0',
             'detail' => 'required|array|min:1',
             'detail.*.barang_id' => 'required|integer',
             'detail.*.qty' => 'required|integer|min:1',
-            'detail.*.harga_satuan' => 'required|numeric',
-            'detail.*.subtotal' => 'required|numeric',
+            'detail.*.harga_satuan' => 'required|numeric|min:0',
+            'detail.*.subtotal' => 'required|numeric|min:0',
         ]);
+
+        // Log request data untuk debugging
+        Log::info('Request data received:', $request->all());
 
         DB::beginTransaction();
         try {
-            // Validasi pembayaran tidak boleh melebihi total
-            $this->validatePayment($request->total, $request->pembayaran);
+            // Validasi pembayaran tidak boleh kurang dari total
+            $this->validatePayment($validated['total'], $validated['pembayaran']);
 
             // Validasi stok sebelum transaksi
-            $this->validateStock($request->detail);
+            $this->validateStock($validated['detail']);
 
             $transaksi = TransaksiModel::create([
                 'kode_transaksi' => $this->generateKodeTransaksi(),
-                'tanggal' => $request->tanggal,
-                'total' => $request->total,
-                'user_id' => $request->user_id,
-                'pembayaran' => $request->pembayaran
+                'tanggal' => $validated['tanggal'],
+                'total' => $validated['total'],
+                'user_id' => $validated['user_id'],
+                'pembayaran' => $validated['pembayaran']
             ]);
 
             // Simpan setiap item detail dan kurangi stok
-            foreach ($request->detail as $item) {
+            foreach ($validated['detail'] as $item) {
                 // Simpan detail transaksi
                 TransaksiDetailModel::create([
                     'transaksi_id' => $transaksi->id,
