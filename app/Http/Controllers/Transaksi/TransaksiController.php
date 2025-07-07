@@ -20,6 +20,7 @@ class TransaksiController extends Controller
         // dd($transaksi);
         return view('transaksi.detail', compact('transaksi'));
     }
+    //dd
 
     public function listByTanggal(Request $request)
     {
