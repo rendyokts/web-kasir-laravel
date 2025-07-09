@@ -5,27 +5,6 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card mb-6">
-                    <!-- Account -->
-                    {{-- <div class="card-body">
-                        <div class="d-flex align-items-start align-items-sm-center gap-6">
-                            <img src="{{ asset('portos/assets/img/avatars/user.png') }}" alt="user-avatar"
-                                class="d-block w-px-100 h-px-100 rounded" id="uploadedAvatar" />
-                            <div class="button-wrapper">
-                                <label for="upload" class="btn btn-primary me-3 mb-4" tabindex="0">
-                                    <span class="d-none d-sm-block">Upload new photo</span>
-                                    <i class="icon-base ti tabler-upload d-block d-sm-none"></i>
-                                    <input type="file" id="upload" class="account-file-input" hidden
-                                        accept="image/png, image/jpeg" />
-                                </label>
-                                <button type="button" class="btn btn-label-secondary account-image-reset mb-4">
-                                    <i class="icon-base ti tabler-reset d-block d-sm-none"></i>
-                                    <span class="d-none d-sm-block">Reset</span>
-                                </button>
-
-                                <div>Allowed JPG, GIF or PNG. Max size of 800K</div>
-                            </div>
-                        </div>
-                    </div> --}}
                     <div class="card-body pt-4">
                         <form id="formAccountSettings" method="POST" onsubmit="return false">
                             <div class="row gy-4 gx-6 mb-6">
@@ -60,8 +39,8 @@
                                         value="{{ $user->status = 1 ? 'Aktif' : 'Tidak Aktif' }}" disabled />
                                 </div>
                                 <div class="mt-5">
-                                    {{-- <a href="{{ route('profil.ganti_password') }}" class="btn btn-primary">Ubah Password</a> --}}
-                                    <a href="{{ route('dashboard') }}" type="button" class="btn btn-danger">Kembali</a>
+                                    <a href="#" class="btn btn-primary btn-sm">Ubah Password</a>
+                                    <a href="{{ route('dashboard') }}" type="button" class="btn btn-danger btn-sm">Kembali</a>
                                 </div>
                         </form>
                     </div>

@@ -321,4 +321,23 @@ class TransaksiController extends Controller
             'total_transaksi' => $totalTransaksi
         ]);
     }
+
+    public function totalTransaksiBulanan(Request $request)
+    {
+        $bulan = Carbon::now()->month;
+        $tahun = Carbon::now()->year;
+
+        // $bulan = $request->input('bulan'); // ex: 7
+        // $tahun = $request->input('tahun'); // ex: 2025
+
+        $jumlahTransaksi = TransaksiModel::whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->count();
+        $totalTransaksi = TransaksiModel::whereMonth('tanggal', $bulan)->whereYear('tanggal', $tahun)->sum('total');
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data transaksi bulan ini berhasil diambil',
+            'jumlah_transaksi' => $jumlahTransaksi,
+            'total_transaksi' => $totalTransaksi
+        ]);
+    }
 }
