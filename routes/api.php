@@ -22,9 +22,12 @@ Route::prefix('mobile')->group(function () {
     Route::get('/list_kategori', [ProdukController::class, 'kategoriList']);
 
     // API TRANSAKSI
-    Route::post('/transaksi', [TransaksiController::class, 'store']);
-    Route::get('/transaksi/harian', [TransaksiController::class, 'totalTransaksiHariIni']);
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/transaksi', [TransaksiController::class, 'store']);
+        Route::get('/transaksi/harian', [TransaksiController::class, 'totalTransaksiHariIni']);
+        Route::get('/transaksi/bulan', [TransaksiController::class, 'totalTransaksiBulanan']);
 
-    Route::get('/transaksi/list', [TransaksiTransaksiController::class, 'listByTanggal']);
-    Route::get('/transaksi/list/{id}', [TransaksiTransaksiController::class, 'detailTransaksi']);
+        Route::get('/transaksi/list', [TransaksiTransaksiController::class, 'listByTanggal']);
+        Route::get('/transaksi/list/{id}', [TransaksiTransaksiController::class, 'detailTransaksi']);
+    });
 });

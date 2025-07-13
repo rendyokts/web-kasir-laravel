@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="{{ asset('portos/assets/vendor/libs/flatpickr/flatpickr.css') }}" />
     <link rel="stylesheet" href="{{ asset('portos/assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css') }}" />
     <link rel="stylesheet" href="{{ asset('portos/assets/vendor/libs/@form-validation/form-validation.css') }}" />
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css" />
+
     <link rel="stylesheet"
         href="{{ asset('portos/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
 @endsection
@@ -37,37 +40,48 @@
                             @csrf
                             @method('DELETE')
                         </form>
-
-
-                        <!-- Table -->
                         <div class="card-body table-responsive">
-                            <table class="table table-striped table-bordered" id="listPkk">
+                            <div class="row mb-3">
+                                <div class="col-md-6 d-flex align-items-center gap-2 flex-wrap"
+                                    id="custom-buttons-container">
+                                    <a href="#" id="exportExcel" class="btn btn-success btn-sm">
+                                        <i class="menu-icon icon-base ti tabler-file-type-xls"></i> Export Excel
+                                    </a>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <select id="filter-bulan" class="form-control form-select">
+                                        <option value="">Pilih Bulan</option>
+                                        @for ($i = 1; $i <= 12; $i++)
+                                            <option value="{{ $i }}">
+                                                {{ DateTime::createFromFormat('!m', $i)->format('F') }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select id="filter-tahun" class="form-control form-select">
+                                        <option value="">Pilih Tahun</option>
+                                        @for ($y = now()->year; $y >= 2022; $y--)
+                                            <option value="{{ $y }}">{{ $y }}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </div>
+
+                            <table class="table table-bordered table-striped" id="table-transaksi">
                                 <thead>
                                     <tr>
-                                        <th width="10">No</th>
+                                        <th>No</th>
+                                        <th>Tanggal</th>
                                         <th>Kode Transaksi</th>
-                                        <th>Tanggal Transaksi</th>
+                                        <th>Kasir</th>
                                         <th>Total</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
-
-                                <tbody>
-                                    @foreach ($data as $q)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $q->kode_transaksi }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($q->tanggal)->format('d M Y H:i') }}</td>
-                                            <td>Rp {{ number_format($q->total, 0, 2) }}</td>
-                                            <td>
-                                                <a href="{{ route('transaksi.detail', ['id' => $q->id]) }}"
-                                                    class="btn btn-warning btn-sm">Detail</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
                             </table>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -77,38 +91,75 @@
 
 @section('page-js')
     <script src="{{ asset('portos/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
-    <script src="{{ asset('portos/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.js') }}"></script>
     <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
     <script src="{{ asset('portos/assets/js/tables-datatables-basic.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Buttons for Excel and PDF -->
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+
     <script>
-        document.querySelectorAll('.btn-delete').forEach(function(button) {
-            button.addEventListener('click', function() {
-                const userId = this.getAttribute('data-id');
-                Swal.fire({
-                    title: 'Yakin ingin menghapus?',
-                    text: "Data yang dihapus tidak bisa dikembalikan!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Ya, hapus!',
-                    cancelButtonText: 'Batal',
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        const form = document.getElementById('formDeleteUser');
-                        form.setAttribute('action', `/delete_category/${userId}`);
-                        form.submit();
+        $(document).ready(function() {
+            const table = $('#table-transaksi').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: '{{ route('transaksi.json') }}',
+                    data: function(d) {
+                        d.bulan = $('#filter-bulan').val();
+                        d.tahun = $('#filter-tahun').val();
                     }
-                });
+                },
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'tanggal',
+                        name: 'tanggal'
+                    },
+                    {
+                        data: 'kode_transaksi',
+                        name: 'kode_transaksi'
+                    },
+                    {
+                        data: 'user_nama',
+                        name: 'user_nama'
+                    },
+                    {
+                        data: 'total',
+                        name: 'total'
+                    },
+                    {
+                        data: 'aksi',
+                        name: 'aksi',
+                        orderable: false,
+                        searchable: false
+                    }
+                ],
+                initComplete: function() {
+                    table.buttons().container().appendTo('#custom-buttons-container');
+                }
+            });
+
+            $('#filter-bulan, #filter-tahun').on('change', function() {
+                table.draw();
             });
         });
     </script>
-    @if (session('user_saved'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const modal = new bootstrap.Modal(document.getElementById('userSavedModal'));
-                modal.show();
-            });
-        </script>
-    @endif
+    <script>
+        $('#exportExcel').on('click', function(e) {
+            e.preventDefault();
+            const bulan = $('#filter-bulan').val();
+            const tahun = $('#filter-tahun').val();
+            const url = `{{ route('transaksi.export') }}?bulan=${bulan}&tahun=${tahun}`;
+            window.location.href = url;
+        });
+    </script>
 @endsection

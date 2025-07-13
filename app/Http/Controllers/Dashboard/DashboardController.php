@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\MasterProdukModel;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -15,9 +16,51 @@ class DashboardController extends Controller
         $terlaris = $this->terlaris();
         $transaksiHarian = $this->transaksiHarian();
         $trxHarian = $this->trxHarian();
-        // dd($trxHarian);
-        return view('frontend.dashboard.index', compact('qtyHarian', 'terlaris', 'transaksiHarian', 'trxHarian'));
+
+        Carbon::setLocale('id');
+
+        $hari = [];
+        $pendapatan = [];
+        $pengeluaran = [];
+
+        for ($i = 0; $i < 7; $i++) {
+            $tanggal = Carbon::now()->startOfWeek()->addDays($i);
+            $hariLabel = $tanggal->translatedFormat('l');
+            $hari[] = $hariLabel;
+
+            $totalMasuk = DB::table('keuangan')
+                ->whereDate('tanggal', $tanggal)
+                ->where('jenis', 'masuk')
+                ->sum('jumlah');
+
+            $totalKeluar = DB::table('keuangan')
+                ->whereDate('tanggal', $tanggal)
+                ->where('jenis', 'keluar')
+                ->sum('jumlah');
+
+            $pendapatan[] = (float) $totalMasuk;
+            $pengeluaran[] = (float) $totalKeluar;
+        }
+
+        $barangStokTipis = MasterProdukModel::where('stok', '<', 5)
+            ->select('nama_barang', 'stok')
+            ->get();
+        // dd($barangStokTipis);
+
+        return view('frontend.dashboard.index', compact(
+            'qtyHarian',
+            'terlaris',
+            'transaksiHarian',
+            'trxHarian',
+            'hari',
+            'pendapatan',
+            'pengeluaran',
+            'barangStokTipis'
+        ), [
+            'labels' => $hari,
+        ]);
     }
+
 
     public function barangTerjualHarian()
     {
@@ -57,7 +100,6 @@ class DashboardController extends Controller
 
     public function transaksiHarian()
     {
-        // total uang harian yang masuk
         $totalTransaksiHariIni = DB::table('transaksi')
             ->whereDate('tanggal', Carbon::today())
             ->sum('total');
@@ -65,7 +107,8 @@ class DashboardController extends Controller
         return $totalTransaksiHariIni;
     }
 
-    public function trxHarian(){
+    public function trxHarian()
+    {
         $totalTrxHarian = DB::table('transaksi')->whereDate('tanggal', Carbon::today())->count('id');
         return $totalTrxHarian;
     }

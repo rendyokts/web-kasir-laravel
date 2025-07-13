@@ -13,6 +13,10 @@ Route::prefix('master_user')->group(function () {
 });
 
 Route::prefix('transaksi')->group(function () {
+    Route::get('/json', [TransaksiController::class, 'getTransaksiJson'])->name('transaksi.json');
     Route::get('/list', [TransaksiController::class, 'list_transaksi'])->name('transaksi.list');
     Route::get('/detail/{id}', [TransaksiController::class, 'detail_transaksi'])->name('transaksi.detail');
+    Route::get('/export', [TransaksiController::class, 'export'])->name('transaksi.export');
+    Route::get('/cetak/{id}', [TransaksiController::class, 'cetak'])->name('transaksi.cetak');
+
 });

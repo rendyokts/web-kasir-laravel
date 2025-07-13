@@ -10,7 +10,6 @@
             </div>
         @endif
      <div class="row g-6 mb-4">
-         <!-- Card Border Shadow -->
          <div class="col-lg-3 col-sm-6">
              <div class="card card-border-shadow-primary h-100">
                  <div class="card-body">
@@ -23,10 +22,6 @@
                      </div>
                      <p class="mb-1">Barang Terjual Pada</p>
                      <div class="mb-1"> {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</div>
-                     {{-- <p class="mb-0">
-                         <span class="text-heading fw-medium me-2">+18.2%</span>
-                         <small class="text-body-secondary">than last week</small>
-                     </p> --}}
                  </div>
              </div>
          </div>
@@ -42,10 +37,6 @@
                      </div>
                      <p class="mb-1">Penjualan Harian</p>
                      <div class="mb-1"> {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</div>
-                     {{-- <p class="mb-0">
-                         <span class="text-heading fw-medium me-2">-8.7%</span>
-                         <small class="text-body-secondary">than last week</small>
-                     </p> --}}
                  </div>
              </div>
          </div>
@@ -59,15 +50,8 @@
                          </div>
                          <h4 class="mb-0"><small>Rp</small> {{ number_format($transaksiHarian, 0, ',', '.') }}</h4>
                      </div>
-                     {{-- @php
-                         dd($terlaris);
-                     @endphp --}}
                      <p class="mb-1">Pendapatan Hari Ini</p>
                      <div class="mb-1"> {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</div>
-                     {{-- <p class="mb-0">
-                         <span class="text-heading fw-medium me-2">+4.3%</span>
-                         <small class="text-body-secondary">than last week</small>
-                     </p> --}}
                  </div>
              </div>
          </div>
@@ -83,14 +67,22 @@
                      </div>
                      <p class="mb-1">Pengeluaran Hari Ini</p>
                      <div class="mb-1"> {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</div>
-                     {{-- <p class="mb-0">
-                         <span class="text-heading fw-medium me-2">-2.5%</span>
-                         <small class="text-body-secondary">than last week</small>
-                     </p> --}}
                  </div>
              </div>
          </div>
-         <!--/ Card Border Shadow -->
+
+         @if ($barangStokTipis->count() > 0)
+             <div class="col-xxl-12 col-lg-12 col-md-12 col-sm-12">
+                 <div class="alert alert-danger fade show" role="alert">
+                     <strong>⚠ Stok Barang Menipis!</strong><br>
+                     <ul class="mb-0 mt-0">
+                         @foreach ($barangStokTipis as $barang)
+                             <li>{{ $barang->nama_barang }} — <strong>{{ $barang->stok }}</strong> item tersisa</li>
+                         @endforeach
+                     </ul>
+                 </div>
+             </div>
+         @endif
 
          <div class="col-xxl-9 col-lg-12 col-md-12 col-sm-12">
              <div class="card h-100">
@@ -125,10 +117,12 @@
                                  <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                      <div class="me-2">
                                          <h6 class="mb-0">{{ $laris->nama_barang }}</h6>
-                                         <small class="text-body d-block">Total terjual: {{ $laris->total_terjual }}</small>
+                                         <small class="text-body d-block">Total terjual:
+                                             {{ $laris->total_terjual }}</small>
                                      </div>
                                      <div class="user-progress d-flex align-items-center gap-1">
-                                         <p class="mb-0">Rp {{ number_format($laris->harga_barang, 0, ',', '.') }}</p>
+                                         <p class="mb-0">Rp {{ number_format($laris->harga_barang, 0, ',', '.') }}
+                                         </p>
                                      </div>
                                  </div>
                              </li>
@@ -143,9 +137,9 @@
              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
              <script src="{{ asset('portos/assets/js/cards-statistics.js') }}"></script>
              <script>
-                 const labels = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
-                 const pendapatanData = [270000, 180000, 250000, 220000, 300000, 270000, 290000]; // contoh
-                 const pengeluaranData = [130000, 150000, 120000, 100000, 110000, 90000, 95000]; // contoh
+                 const labels = @json($labels);
+                 const pendapatanData = @json($pendapatan);
+                 const pengeluaranData = @json($pengeluaran);
 
                  new Chart(document.getElementById('pendapatanPengeluaranChart'), {
                      type: 'line',
