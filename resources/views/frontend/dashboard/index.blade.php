@@ -7,8 +7,7 @@
     <!-- Content wrapper -->
     <div class="content-wrapper">
 
-        
-            @include('frontend.dashboard.dashboard')
+        @include('frontend.dashboard.dashboard')
 
         {{-- @include('portos.layouts.footer')  --}}
 

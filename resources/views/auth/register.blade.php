@@ -4,14 +4,7 @@
     <!-- Content -->
     <div class="authentication-wrapper authentication-cover">
         <!-- Logo -->
-        <a href="{{ route('login') }}" class="app-brand auth-cover-brand d-none d-xl-flex">
-            <span class="app-brand-logo demo">
-                <span class="text-primary">
-                    <img src="{{ asset('assets/img/frame2.png') }}" alt="logo" class="rounded-5" style="width: 60px; height:auto;">
-                </span>
-            </span>
-            <span class="app-brand-text demo text-heading fw-bold">WARKOPOS</span>
-        </a>
+        <x-logo-auth></x-logo-auth>
         <!-- /Logo -->
         <div class="authentication-inner row m-0">
             <!-- /Left Text -->

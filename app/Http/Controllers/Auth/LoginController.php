@@ -114,6 +114,7 @@ class LoginController extends Auth
             'role' => 'kasir',
             'status' => 2,
             'username' => $request->username,
+            'regist_by_google' => 1,
         ];
         User::create($data);
         return redirect()->route('login')->with('success','Registrasi berhasil borr');

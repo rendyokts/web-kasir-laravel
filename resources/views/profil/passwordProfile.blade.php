@@ -1,239 +1,108 @@
 @extends('layouts.master')
-
+@section('page-css')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@endsection
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <!-- Change Password -->
-            <div class="card mb-6">
-                <h5 class="card-header">Change Password</h5>
-                <div class="card-body pt-1">
-                    <form id="formAccountSettings" method="POST" onsubmit="return false">
-                        <div class="row mb-sm-6 mb-2">
-                            <div class="col-md-6 form-password-toggle form-control-validation">
-                                <label class="form-label" for="currentPassword">Current Password</label>
-                                <div class="input-group input-group-merge">
-                                    <input class="form-control" type="password" name="currentPassword" id="currentPassword"
-                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
-                                    <span class="input-group-text cursor-pointer"><i
-                                            class="icon-base ti tabler-eye-off icon-xs"></i></span>
-                                </div>
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: 'Berhasil!',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Change Password -->
+                <div class="card mb-6">
+                    <h5 class="card-header">Change Password</h5>
+                    <div class="card-body pt-1">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul class="d-flex flex-column justify-start align-content-center mb-1 p-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li class="list-group-item ">{{ $error }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
-                        </div>
-                        <div class="row gy-sm-6 gy-2 mb-sm-0 mb-2">
-                            <div class="mb-6 col-md-6 form-password-toggle form-control-validation">
-                                <label class="form-label" for="newPassword">New Password</label>
-                                <div class="input-group input-group-merge">
-                                    <input class="form-control" type="password" id="newPassword" name="newPassword"
-                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
-                                    <span class="input-group-text cursor-pointer"><i
-                                            class="icon-base ti tabler-eye-off icon-xs"></i></span>
-                                </div>
-                            </div>
-
-                            <div class="mb-6 col-md-6 form-password-toggle form-control-validation">
-                                <label class="form-label" for="confirmPassword">Confirm New Password</label>
-                                <div class="input-group input-group-merge">
-                                    <input class="form-control" type="password" name="confirmPassword" id="confirmPassword"
-                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
-                                    <span class="input-group-text cursor-pointer"><i
-                                            class="icon-base ti tabler-eye-off icon-xs"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                        <h6 class="text-body">Password Requirements:</h6>
-                        <ul class="ps-4 mb-0">
-                            <li class="mb-4">Minimum 8 characters long - the more, the better</li>
-                            <li class="mb-4">At least one lowercase character</li>
-                            <li>At least one number, symbol, or whitespace character</li>
-                        </ul>
-                        <div class="mt-6">
-                            <button type="submit" class="btn btn-primary me-3">Save changes</button>
-                            <button type="reset" class="btn btn-label-secondary">Reset</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!--/ Change Password -->
-
-            <!-- Two-steps verification -->
-            <div class="card mb-6">
-                <div class="card-body">
-                    <h5 class="mb-6">Two-steps verification</h5>
-                    <h5 class="mb-4 text-body">Two factor authentication is not enabled yet.</h5>
-                    <p class="w-75">
-                        Two-factor authentication adds an additional layer of security to your account by requiring more
-                        than just a password to log in.
-                        <a href="javascript:void(0);" class="text-nowrap">Learn more.</a>
-                    </p>
-                    <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#enableOTP">Enable
-                        Two-Factor Authentication</button>
-                </div>
-            </div>
-            <!-- Modal -->
-            @include('_partials/_modals/modal-enable-otp')
-            <!-- /Modal -->
-
-            <!--/ Two-steps verification -->
-
-            <!-- Create an API key -->
-            <div class="card mb-6">
-                <h5 class="card-header">Create an API key</h5>
-                <div class="row">
-                    <div class="col-md-5 order-md-0 order-1">
-                        <div class="card-body">
-                            <form id="formAccountSettingsApiKey" method="POST" onsubmit="return false">
-                                <div class="row">
-                                    <div class="mb-5 col-12">
-                                        <label for="apiAccess" class="form-label">Choose the Api key type you want to
-                                            create</label>
-                                        <select id="apiAccess" class="select2 form-select">
-                                            <option value="">Choose Key Type</option>
-                                            <option value="full">Full Control</option>
-                                            <option value="modify">Modify</option>
-                                            <option value="read-execute">Read & Execute</option>
-                                            <option value="folders">List Folder Contents</option>
-                                            <option value="read">Read Only</option>
-                                            <option value="read-write">Read & Write</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-5 col-12">
-                                        <label for="apiKey" class="form-label">Name the API key</label>
-                                        <input type="text" class="form-control" id="apiKey" name="apiKey"
-                                            placeholder="Server Key 1" />
-                                    </div>
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary me-2 d-grid w-100">Create
-                                            Key</button>
+                        @endif
+                        <form id="formAccountSettings" action="{{ route('change.password') }}" method="POST">
+                            @csrf
+                            @if (auth()->user()->regist_by_google !== 2)
+                                <div class="row mb-sm-6 mb-2">
+                                    <div class="col-md-6 form-password-toggle form-control-validation">
+                                        <label class="form-label" for="password-lama">Password Lama</label>
+                                        <div class="input-group input-group-merge">
+                                            <input class="form-control" type="password" name="password_lama"
+                                                id="password_lama"
+                                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
+                                            <span class="input-group-text cursor-pointer"><i
+                                                    class="icon-base ti tabler-eye-off icon-xs"></i></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-md-7 order-md-1 order-0">
-                        <div class="text-center mt-4 mx-3 mx-md-0">
-                            <img src="{{ asset('assets/img/illustrations/girl-with-laptop.png') }}" class="img-fluid"
-                                alt="Api Key Image" width="202" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--/ Create an API key -->
+                            @endif
 
-            <!-- API Key List & Access -->
-            <div class="card mb-6">
-                <div class="card-body">
-                    <h5>API Key List & Access</h5>
-                    <p class="mb-6">An API key is a simple encrypted string that identifies an application without any
-                        principal. They are useful for accessing public data anonymously, and are used to associate API
-                        requests with your project for quota and billing.</p>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="bg-lighter rounded p-4 mb-6 position-relative">
-                                <div class="d-flex align-items-center mb-2">
-                                    <h5 class="mb-0 me-3">Server Key 1</h5>
-                                    <span class="badge bg-label-primary">Full Access</span>
+                            <div class="row gy-sm-6 gy-2 mb-sm-0 mb-2">
+                                <div class="mb-6 col-md-6 form-password-toggle form-control-validation">
+                                    <label class="form-label" for="password-baru">Password Baru</label>
+                                    <div class="input-group input-group-merge">
+                                        <input class="form-control" type="password" id="password_baru" name="password_baru"
+                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
+                                        <span class="input-group-text cursor-pointer"><i
+                                                class="icon-base ti tabler-eye-off icon-xs"></i></span>
+                                    </div>
                                 </div>
-                                <div class="d-flex align-items-center mb-2">
-                                    <p class="me-3 mb-0 fw-medium">23eaf7f0-f4f7-495e-8b86-fad3261282ac</p>
-                                    <span class="cursor-pointer"><i class="icon-base ti tabler-copy"></i></span>
+
+                                <div class="mb-6 col-md-6 form-password-toggle form-control-validation">
+                                    <label class="form-label" for="confirm-Password">Konfirmasi Password Baru</label>
+                                    <div class="input-group input-group-merge">
+                                        <input class="form-control" type="password" name="password_baru_confirmation"
+                                            id="password_baru_confirmation"
+                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
+                                        <span class="input-group-text cursor-pointer"><i
+                                                class="icon-base ti tabler-eye-off icon-xs"></i></span>
+                                    </div>
                                 </div>
-                                <span class="text-body-secondary">Created on 28 Apr 2021, 18:20 GTM+4:10</span>
                             </div>
-                            <div class="bg-lighter rounded p-4 position-relative mb-6">
-                                <div class="d-flex align-items-center mb-2">
-                                    <h5 class="mb-0 me-3">Server Key 2</h5>
-                                    <span class="badge bg-label-primary">Read Only</span>
-                                </div>
-                                <div class="d-flex align-items-center mb-2">
-                                    <p class="me-3 mb-0 fw-medium">bb98e571-a2e2-4de8-90a9-2e231b5e99</p>
-                                    <span class="cursor-pointer"><i class="icon-base ti tabler-copy"></i></span>
-                                </div>
-                                <span class="text-body-secondary">Created on 12 Feb 2021, 10:30 GTM+2:30</span>
+                            <h6 class="text-body">Password Requirements:</h6>
+                            <ul class="ps-4 mb-0">
+                                <li class="mb-4">Minimal panjang 8 karakter atau lebih</li>
+                                <li class="mb-4">At least one lowercase character</li>
+                            </ul>
+                            <div class="mt-6">
+                                <button type="button" class="btn btn-primary me-3" id="btn-submit">Simpan</button>
+                                <button type="reset" class="btn btn-danger">Reset</button>
                             </div>
-                            <div class="bg-lighter rounded p-4 position-relative">
-                                <div class="d-flex align-items-center mb-2">
-                                    <h5 class="mb-0 me-3">Server Key 3</h5>
-                                    <span class="badge bg-label-primary">Full Access</span>
-                                </div>
-                                <div class="d-flex align-items-center mb-2">
-                                    <p class="me-3 mb-0 fw-medium">2e915e59-3105-47f2-8838-6e46bf83b711</p>
-                                    <span class="cursor-pointer"><i class="icon-base ti tabler-copy"></i></span>
-                                </div>
-                                <span class="text-body-secondary">Created on 28 Dec 2020, 12:21 GTM+4:10</span>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
-            </div>
-            <!--/ API Key List & Access -->
+                <!--/ Change Password -->
 
-            <!-- Recent Devices -->
-            <div class="card mb-6">
-                <h5 class="card-header">Recent Devices</h5>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th class="text-truncate">Browser</th>
-                                <th class="text-truncate">Device</th>
-                                <th class="text-truncate">Location</th>
-                                <th class="text-truncate">Recent Activities</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-truncate text-heading fw-medium"><i
-                                        class="icon-base ti tabler-brand-windows icon-md align-top text-info me-2"></i>Chrome
-                                    on Windows</td>
-                                <td class="text-truncate">HP Spectre 360</td>
-                                <td class="text-truncate">Switzerland</td>
-                                <td class="text-truncate">10, July 2021 20:07</td>
-                            </tr>
-                            <tr>
-                                <td class="text-truncate text-heading fw-medium"><i
-                                        class="icon-base ti tabler-device-mobile icon-md  align-top text-danger me-2"></i>Chrome
-                                    on iPhone</td>
-                                <td class="text-truncate">iPhone 12x</td>
-                                <td class="text-truncate">Australia</td>
-                                <td class="text-truncate">13, July 2021 10:10</td>
-                            </tr>
-                            <tr>
-                                <td class="text-truncate text-heading fw-medium"><i
-                                        class="icon-base ti tabler-brand-android icon-md align-top text-success me-2"></i>Chrome
-                                    on Android</td>
-                                <td class="text-truncate">Oneplus 9 Pro</td>
-                                <td class="text-truncate">Dubai</td>
-                                <td class="text-truncate">14, July 2021 15:15</td>
-                            </tr>
-                            <tr>
-                                <td class="text-truncate text-heading fw-medium"><i
-                                        class="icon-base ti tabler-brand-apple icon-md align-top me-2"></i>Chrome on MacOS
-                                </td>
-                                <td class="text-truncate">Apple iMac</td>
-                                <td class="text-truncate">India</td>
-                                <td class="text-truncate">16, July 2021 16:17</td>
-                            </tr>
-                            <tr>
-                                <td class="text-truncate text-heading fw-medium"><i
-                                        class="icon-base ti tabler-brand-windows icon-md align-top text-warning me-2"></i>Chrome
-                                    on Windows</td>
-                                <td class="text-truncate">HP Spectre 360</td>
-                                <td class="text-truncate">Switzerland</td>
-                                <td class="text-truncate">20, July 2021 21:01</td>
-                            </tr>
-                            <tr class="border-transparent">
-                                <td class="text-truncate text-heading fw-medium"><i
-                                        class="icon-base ti tabler-brand-android icon-md align-top text-success me-2"></i>Chrome
-                                    on Android</td>
-                                <td class="text-truncate">Oneplus 9 Pro</td>
-                                <td class="text-truncate">Dubai</td>
-                                <td class="text-truncate">21, July 2021 12:22</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
-            <!--/ Recent Devices -->
         </div>
     </div>
+@endsection
+
+@section('page-js')
+<script>
+        document.getElementById('btn-submit').addEventListener('click', function() {
+                Swal.fire({
+                    title: 'Yakin ingin menyimpan?',
+                    text: "Harap di ingat password baru Anda!",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Simpan!',
+                    cancelButtonText: 'Batal',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                          document.getElementById('formAccountSettings').submit();
+                    }
+                });
+            });
+    </script>
 @endsection
