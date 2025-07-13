@@ -18,7 +18,7 @@ class GoogleController extends Controller
 
     public function handleGoogleCallback()
     {
-        $user = Socialite::driver('google')->user(); //Gunakan stateless()->user() hanya untuk API atau situasi khusus dimana session tidak tersedia atau tidak diperlukan.
+        $user = Socialite::driver('google')->stateless()->user(); //Gunakan stateless()->user() hanya untuk API atau situasi khusus dimana session tidak tersedia atau tidak diperlukan.
 
         $find_user = User::where('email', $user->email)->first();
 
@@ -29,7 +29,7 @@ class GoogleController extends Controller
             }
             Auth::login($find_user);
         } else {
-            $new_user = User::create([
+            $new_user = [
                 'name'            => $user->name,
                 'username'        => explode('@', $user->email)[0],
                 'email'           => $user->email,
@@ -37,9 +37,10 @@ class GoogleController extends Controller
                 'telp'            => '',
                 'google_id'       => $user->id,
                 'password'        => Hash::make('my-google'),
-                'status'          => 2
-            ]);
-
+                'status'          => 2,
+                'regist_by_google'=> 2,
+            ];
+            User::create($new_user);
             // Auth::login($new_user);
             return redirect()->route('login')->with('info','Akun anda telah dibuat. Silahkan tunggu persetujuan admin');
         }

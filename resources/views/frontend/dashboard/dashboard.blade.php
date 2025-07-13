@@ -1,4 +1,14 @@
  <div class="container-xxl flex-grow-1 container-p-y">
+    @if (auth()->user()->regist_by_google === 2)
+
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <strong class="text-primary">Perhatian!</strong> <span class="text-primary">Anda login menggunakan Google. Silahkan segera ganti password Anda.</span>
+                <a href="{{ route('profil.ganti-password') }}" class="btn btn-sm btn-primary ms-3">
+                    Ubah Password
+                </a>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
      <div class="row g-6 mb-4">
          <!-- Card Border Shadow -->
          <div class="col-lg-3 col-sm-6">

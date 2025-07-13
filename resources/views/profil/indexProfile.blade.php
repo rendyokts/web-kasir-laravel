@@ -60,8 +60,8 @@
                                         value="{{ $user->status = 1 ? 'Aktif' : 'Tidak Aktif' }}" disabled />
                                 </div>
                                 <div class="mt-5">
-                                    {{-- <a href="{{ route('profil.ganti_password') }}" class="btn btn-primary">Ubah Password</a> --}}
                                     <a href="{{ route('dashboard') }}" type="button" class="btn btn-danger">Kembali</a>
+                                    <a href="{{ route('profil.ganti-password') }}" class="btn btn-primary">Ubah Password</a>
                                 </div>
                         </form>
                     </div>

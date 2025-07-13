@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfilController extends Controller
 {
-    public function index($id)
+    public function index()
     {
         $user = auth()->user();
         // dd($user);
@@ -42,19 +42,35 @@ class ProfilController extends Controller
 
     public function changePassword(Request $request)
     {
-        $request->validate([
-            'password_lama' => 'required',
-            'password_baru' => 'required|string|min:8|confirmed',
-        ]);
-
         $user = auth()->user();
 
-        if (!Hash::check($request->password_lama, $user->password)) {
-            return back()->with('error', 'Password lama tidak sesuai');
+        if ($user->regist_by_google === 2) {
+            $request->validate([
+                'password_baru' => 'required|string|min:8|confirmed',
+            ], [
+                'password_baru.required' => 'Tidak boleh kosong',
+                'password_baru.min' => 'Masih kurang',
+            ]);
+        } else {
+            $request->validate([
+                'password_lama' => 'required',
+                'password_baru' => 'required|string|min:8|confirmed',
+            ], [
+                'password_lama.required' => 'Password lama tidak boleh kosong',
+                'password_baru.required' => 'Password baru tidak boleh kosong',
+                'password_baru.min' => 'Masih kurang karakter',
+            ]);
+            
+            if (!Hash::check($request->password_lama, $user->password)) {
+                return back()->with('error', 'Password lama tidak sesuai');
+            }
         }
 
+
+
         $user->update([
-            'password' => Hash::make($request->password_baru)
+            'password' => Hash::make($request->password_baru),
+            'regist_by_google' => 1
         ]);
 
         return back()->with('success', 'Password berhasil diubah');
