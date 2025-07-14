@@ -74,8 +74,8 @@
                                 <li class="mb-4">At least one lowercase character</li>
                             </ul>
                             <div class="mt-6">
-                                <button type="button" class="btn btn-primary me-3" id="btn-submit">Simpan</button>
-                                <button type="reset" class="btn btn-danger">Reset</button>
+                                <button type="button" class="btn btn-primary me-3 btn-sm" id="btn-submit">Simpan</button>
+                                <button type="reset" class="btn btn-danger btn-sm">Reset</button>
                             </div>
                         </form>
                     </div>
