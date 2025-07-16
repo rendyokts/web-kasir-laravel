@@ -29,5 +29,7 @@ Route::prefix('mobile')->group(function () {
 
         Route::get('/transaksi/list', [TransaksiTransaksiController::class, 'listByTanggal']);
         Route::get('/transaksi/list/{id}', [TransaksiTransaksiController::class, 'detailTransaksi']);
+
+        Route::get('/transaksi/all', [TransaksiController::class, 'getAllDataTransaksi']);
     });
 });

@@ -10,13 +10,13 @@ class TransaksiModel extends Model
 
     protected $guarded = ['id'];
 
-     public function details()
+    public function details()
     {
         return $this->hasMany(TransaksiDetailModel::class, 'transaksi_id', 'id');
     }
 
     public function user()
     {
-        return $this->belongsTo(MasterUserModel::class);
+        return $this->belongsTo(MasterUserModel::class, 'user_id', 'id');
     }
 }
