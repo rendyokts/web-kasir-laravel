@@ -10,7 +10,7 @@
     },
     "servers": [
         {
-            "url": "https://webkasir.milyascube.site",
+            "url": "http://webkasir.test",
             "description": "API Server"
         }
     ],

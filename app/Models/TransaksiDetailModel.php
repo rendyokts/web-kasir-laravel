@@ -18,6 +18,6 @@ class TransaksiDetailModel extends Model
 
     public function produk()
     {
-        return $this->belongsTo(MasterProdukModel::class, 'barang_id');
+        return $this->belongsTo(MasterProdukModel::class, 'barang_id', 'id');
     }
 }

@@ -340,4 +340,42 @@ class TransaksiController extends Controller
             'total_transaksi' => $totalTransaksi
         ]);
     }
+
+    public function getAllDataTransaksi()
+    {
+        $transaksi = TransaksiModel::with(['details.produk', 'user'])->orderBy('tanggal', 'desc')->get();
+
+        $result = $transaksi->map(function ($trx) {
+            return [
+                'id' => $trx->id,
+                'kode_transaksi' => $trx->kode_transaksi,
+                'tanggal' => $trx->tanggal,
+                'total' => $trx->total,
+                'pembayaran' => $trx->pembayaran,
+                'user_id' => $trx->user_id,
+                'user_name' => $trx->user->name ?? null,
+                'details' => $trx->details->map(function ($detail) {
+                    return [
+                        'id' => $detail->id,
+                        'barang_id' => $detail->barang_id,
+                        'qty' => $detail->qty,
+                        'harga_satuan' => $detail->harga_satuan,
+                        'subtotal' => $detail->subtotal,
+                        'produk' => [
+                            'id' => $detail->produk->id ?? null,
+                            'nama_barang' => $detail->produk->nama_barang ?? null,
+                            'harga_barang' => $detail->produk->harga_barang ?? null,
+                        ],
+                    ];
+                }),
+            ];
+        });
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Semua data transaksi',
+            'data' => $result,
+            'total' => $result->count()
+        ]);
+    }
 }
