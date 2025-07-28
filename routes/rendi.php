@@ -18,5 +18,4 @@ Route::prefix('transaksi')->group(function () {
     Route::get('/detail/{id}', [TransaksiController::class, 'detail_transaksi'])->name('transaksi.detail');
     Route::get('/export', [TransaksiController::class, 'export'])->name('transaksi.export');
     Route::get('/cetak/{id}', [TransaksiController::class, 'cetak'])->name('transaksi.cetak');
-
 });
